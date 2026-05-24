@@ -16,6 +16,13 @@ export default function FAQ() {
       a: 'Nada por adelantado. Sólo cobramos un porcentaje de la compensación si ganamos tu caso. Si no ganamos, no pagas absolutamente nada.' },
   ];
   const [open, setOpen] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.lucide) {
+      window.lucide.createIcons();
+    }
+  }, [open]);
+
   return (
     <section className="ta-section ta-faq" id="faq">
       <div className="container">
