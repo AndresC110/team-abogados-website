@@ -1,17 +1,54 @@
 'use client';
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
 
 // ContactSheet.jsx — right-side intake modal
 export default function ContactSheet({ open, onClose }) {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const formRef = useRef(null);
 
   useEffect(() => {
-    if (!open) setTimeout(() => setSent(false), 400);
+    if (!open) {
+      setTimeout(() => {
+        setSent(false);
+        setError('');
+      }, 400);
+    }
   }, [open]);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setError('');
+
+    try {
+      const formData = new FormData(formRef.current);
+      const data = {
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        accidentType: formData.get('accidentType'),
+        contactTime: formData.get('contactTime'),
+        message: formData.get('message'),
+      };
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el formulario');
+      }
+
+      setSent(true);
+    } catch (err) {
+      setError(err.message || 'Error procesando la solicitud');
+      console.error('Form error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,18 +64,19 @@ export default function ContactSheet({ open, onClose }) {
             <p className="eyebrow">Consulta gratis</p>
             <h2>Cuéntanos <em>qué pasó.</em></h2>
             <p className="lede">Un abogado del equipo te llama dentro de los próximos diez minutos. En español, sin compromiso.</p>
-            <form onSubmit={submit}>
+            {error && <div style={{ color: 'var(--ta-gold-700)', marginBottom: 12 }}>{error}</div>}
+            <form ref={formRef} onSubmit={submit}>
               <div className="field">
                 <label>Nombre completo</label>
-                <input required placeholder="Como aparece en tu identificación" />
+                <input name="name" required placeholder="Como aparece en tu identificación" />
               </div>
               <div className="field">
                 <label>Teléfono</label>
-                <input required type="tel" placeholder="(___) ___-____" />
+                <input name="phone" required type="tel" placeholder="(___) ___-____" />
               </div>
               <div className="field">
                 <label>Tipo de accidente</label>
-                <select defaultValue="">
+                <select name="accidentType" defaultValue="" required>
                   <option value="" disabled>Selecciona una opción</option>
                   <option>Accidente de auto</option>
                   <option>Construcción · caída desde altura</option>
@@ -51,21 +89,21 @@ export default function ContactSheet({ open, onClose }) {
               </div>
               <div className="field">
                 <label>¿Cuándo desea ser contactado?</label>
-                <select defaultValue="asap">
+                <select name="contactTime" defaultValue="asap">
                   <option value="asap">Lo antes posible</option>
-                  <option>Esta mañana (8 a 12 h)</option>
-                  <option>Esta tarde (12 a 18 h)</option>
-                  <option>Esta noche (18 a 22 h)</option>
-                  <option>Mañana</option>
-                  <option>Este fin de semana</option>
+                  <option value="morning">Esta mañana (8 a 12 h)</option>
+                  <option value="afternoon">Esta tarde (12 a 18 h)</option>
+                  <option value="evening">Esta noche (18 a 22 h)</option>
+                  <option value="tomorrow">Mañana</option>
+                  <option value="weekend">Este fin de semana</option>
                 </select>
               </div>
               <div className="field">
                 <label>Cuéntanos qué pasó</label>
-                <textarea placeholder="Escribe con tus propias palabras. Sin formalidades."></textarea>
+                <textarea name="message" placeholder="Escribe con tus propias palabras. Sin formalidades."></textarea>
               </div>
-              <button className="btn btn-primary submit" type="submit">
-                Enviar mensaje <span className="arr">→</span>
+              <button className="btn btn-primary submit" type="submit" disabled={loading}>
+                {loading ? 'Enviando...' : 'Enviar mensaje'} <span className="arr">→</span>
               </button>
               <p className="terms">
                 Al enviar este formulario aceptas nuestra <a href="#">política de privacidad</a>.
