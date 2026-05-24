@@ -1,0 +1,276 @@
+/* =============================================================
+   Team Abogados — Foundations
+   Colors + Type tokens. Import this from any design file.
+   ============================================================= */
+
+/* ---------- Web fonts (Google Fonts CDN) ----------
+   Cinzel       — inscriptional all-caps roman, wordmark + small caps moments
+   Cormorant Garamond — editorial display + refined long-form
+   Manrope      — UI / body sans, clean & premium
+   ---------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ============ COLOR — RAW PALETTE ============ */
+
+  /* Black scale (deep, never pure — keeps a warm undertone on cream) */
+  --ta-black:        #0B0B0C;   /* primary ink */
+  --ta-black-90:     #1A1A1B;   /* card surfaces on cream */
+  --ta-black-80:     #2A2A2B;
+  --ta-black-60:     #4F4F50;
+  --ta-black-40:     #7C7C7D;
+  --ta-black-20:     #B9B9BA;
+  --ta-black-10:     #D9D9DA;
+
+  /* Gold scale — antique, restrained. Matches the logo's muted brass. */
+  --ta-gold-900:     #6B4F1B;   /* engraving / type on cream */
+  --ta-gold-700:     #9A7A2E;   /* hover + active states */
+  --ta-gold-500:     #C9A961;   /* primary brand gold */
+  --ta-gold-400:     #D4B97A;
+  --ta-gold-300:     #E1CE9E;
+  --ta-gold-200:     #ECDFC2;
+  --ta-gold-100:     #F4ECD6;   /* tonal fills on cream */
+
+  /* Cream / paper scale — the canvas */
+  --ta-cream:        #F4EEDF;   /* primary cream — body bg */
+  --ta-cream-soft:   #FAF6EC;   /* lifted surfaces */
+  --ta-paper:        #FBF8F1;   /* near-white paper for cards on cream */
+  --ta-bone:         #EDE5D1;   /* pressed / deeper cream */
+
+  /* Semantic — used sparingly. The brand reads via black + gold, not these. */
+  --ta-success:      #4F6B3E;   /* moss, not bright green */
+  --ta-warning:      #B07D2C;   /* dim amber, close to gold */
+  --ta-danger:       #8E2A2A;   /* deep oxblood, never red-alert red */
+  --ta-info:         #2F4A6B;   /* dusty navy */
+
+  /* ============ COLOR — SEMANTIC ============ */
+
+  /* On cream (default light mode) */
+  --bg:              var(--ta-cream);
+  --bg-soft:         var(--ta-cream-soft);
+  --bg-paper:        var(--ta-paper);
+  --bg-pressed:      var(--ta-bone);
+  --surface:         var(--ta-paper);
+  --surface-ink:     var(--ta-black);          /* primary block surfaces */
+  --surface-ink-fg:  var(--ta-cream);
+
+  --fg:              var(--ta-black);          /* primary text */
+  --fg-muted:        var(--ta-black-60);
+  --fg-subtle:       var(--ta-black-40);
+  --fg-inverse:      var(--ta-cream);
+
+  --accent:          var(--ta-gold-500);       /* primary accent */
+  --accent-strong:   var(--ta-gold-700);
+  --accent-soft:     var(--ta-gold-100);
+  --accent-ink:      var(--ta-gold-900);       /* gold-on-cream type */
+
+  --line:            var(--ta-black-10);       /* hairline dividers on cream */
+  --line-strong:     var(--ta-black-20);
+  --line-gold:       var(--ta-gold-400);
+
+  /* Focus ring — gold, double-thin for premium feel */
+  --focus-ring:      0 0 0 2px var(--ta-cream), 0 0 0 4px var(--ta-gold-500);
+
+  /* ============ TYPE — FAMILIES ============ */
+  --font-display:    'Cinzel', 'Trajan Pro', 'Times New Roman', serif;
+  --font-serif:      'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --font-sans:       'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:       ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ============ TYPE — SCALE ============ */
+  /* Generous, editorial. All sizes assume a 1280–1440 base. */
+  --fs-xs:    12px;
+  --fs-sm:    14px;
+  --fs-base:  16px;
+  --fs-md:    18px;
+  --fs-lg:    20px;
+  --fs-xl:    24px;
+  --fs-2xl:   30px;
+  --fs-3xl:   40px;
+  --fs-4xl:   56px;
+  --fs-5xl:   80px;
+  --fs-6xl:   112px;
+
+  /* Line heights */
+  --lh-tight: 1.05;
+  --lh-snug:  1.2;
+  --lh-base:  1.55;
+  --lh-loose: 1.7;
+
+  /* Letter spacing */
+  --ls-display:     0.06em;   /* Cinzel all-caps wants air */
+  --ls-eyebrow:     0.22em;   /* gold-rule eyebrows */
+  --ls-tight:       -0.01em;
+  --ls-tighter:     -0.02em;
+  --ls-normal:      0;
+
+  /* ============ SPACING ============ */
+  --s-0:   0;
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:   12px;
+  --s-4:   16px;
+  --s-5:   20px;
+  --s-6:   24px;
+  --s-8:   32px;
+  --s-10:  40px;
+  --s-12:  48px;
+  --s-16:  64px;
+  --s-20:  80px;
+  --s-24:  96px;
+  --s-32:  128px;
+  --s-40:  160px;
+
+  /* ============ RADII ============ */
+  /* Restrained — premium law firm reads as crisp, not bubbly. */
+  --r-none:  0;
+  --r-xs:    2px;     /* default for inputs, chips */
+  --r-sm:    4px;     /* buttons */
+  --r-md:    8px;     /* cards */
+  --r-lg:    14px;    /* large cards */
+  --r-pill:  999px;   /* used only for status dots, never CTAs */
+
+  /* ============ SHADOWS ============ */
+  /* Soft, paper-like. No big purple blooms. */
+  --shadow-xs:  0 1px 1px rgba(11,11,12,0.04);
+  --shadow-sm:  0 1px 2px rgba(11,11,12,0.06), 0 1px 1px rgba(11,11,12,0.04);
+  --shadow-md:  0 6px 16px -4px rgba(11,11,12,0.12), 0 2px 4px rgba(11,11,12,0.06);
+  --shadow-lg:  0 24px 48px -16px rgba(11,11,12,0.22), 0 8px 16px -8px rgba(11,11,12,0.10);
+  --shadow-ink: 0 24px 48px -16px rgba(11,11,12,0.45);  /* under black blocks */
+  --shadow-inner: inset 0 1px 0 rgba(255,255,255,0.04);
+
+  /* ============ MOTION ============ */
+  --ease-out:    cubic-bezier(.2, .7, .2, 1);
+  --ease-in-out: cubic-bezier(.5, 0, .2, 1);
+  --dur-fast:    140ms;
+  --dur-base:    220ms;
+  --dur-slow:    420ms;
+
+  /* ============ LAYOUT ============ */
+  --container-sm:  720px;
+  --container-md:  960px;
+  --container-lg:  1200px;
+  --container-xl:  1440px;
+  --gutter:        24px;
+  --grid-cols:     12;
+}
+
+/* ============ BASE ELEMENT STYLES ============ */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* H1-H4: editorial serif. H5/H6: inscriptional display. */
+h1, .h1 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--fs-5xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tighter);
+  color: var(--fg);
+  text-wrap: balance;
+}
+h2, .h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--fs-4xl);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  text-wrap: balance;
+}
+h3, .h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+}
+h4, .h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-snug);
+}
+h5, .h5 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+}
+h6, .h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+/* Eyebrow — used above section titles */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* Body */
+p, .body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-loose);
+  color: var(--fg);
+  text-wrap: pretty;
+}
+.lede {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.small  { font-size: var(--fs-sm); }
+.micro  { font-size: var(--fs-xs); letter-spacing: 0.04em; }
+.mono   { font-family: var(--font-mono); }
+
+/* Wordmark — the brand name itself, set in display caps */
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+}
+
+/* Links */
+a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+a:hover { color: var(--accent-strong); border-color: var(--accent-strong); }
+
+/* Selection */
+::selection { background: var(--accent); color: var(--ta-black); }
