@@ -38,8 +38,10 @@ export default function ContactSheet({ open, onClose }) {
         body: JSON.stringify(data),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Error al enviar el formulario');
+        throw new Error(result.error || 'Error al enviar el formulario');
       }
 
       setSent(true);
@@ -91,7 +93,7 @@ export default function ContactSheet({ open, onClose }) {
               </div>
               <div className="field">
                 <label>Cuéntanos qué pasó</label>
-                <textarea name="message" placeholder="Escribe con tus propias palabras. Sin formalidades."></textarea>
+                <textarea name="message" required placeholder="Escribe con tus propias palabras. Sin formalidades."></textarea>
               </div>
               <button className="btn btn-primary submit" type="submit" disabled={loading}>
                 {loading ? 'Enviando...' : 'Enviar mensaje'} <span className="arr">→</span>
