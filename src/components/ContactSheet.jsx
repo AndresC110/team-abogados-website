@@ -27,7 +27,7 @@ export default function ContactSheet({ open, onClose }) {
       const data = {
         name: formData.get('name'),
         phone: formData.get('phone'),
-        accidentType: formData.get('accidentType'),
+        email: formData.get('email'),
         contactTime: formData.get('contactTime'),
         message: formData.get('message'),
       };
@@ -75,17 +75,8 @@ export default function ContactSheet({ open, onClose }) {
                 <input name="phone" required type="tel" placeholder="(___) ___-____" />
               </div>
               <div className="field">
-                <label>Tipo de accidente</label>
-                <select name="accidentType" defaultValue="" required>
-                  <option value="" disabled>Selecciona una opción</option>
-                  <option>Accidente de auto</option>
-                  <option>Construcción · caída desde altura</option>
-                  <option>Resbalón o caída</option>
-                  <option>Atropello peatonal</option>
-                  <option>Negligencia médica</option>
-                  <option>Lesión laboral</option>
-                  <option>Otro</option>
-                </select>
+                <label>Correo electrónico</label>
+                <input name="email" required type="email" placeholder="tu@correo.com" />
               </div>
               <div className="field">
                 <label>¿Cuándo desea ser contactado?</label>

@@ -26,7 +26,7 @@ html { scroll-behavior: smooth; }
 .ta-header .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; border: 0; }
 .ta-header .brand img { height: 40px; width: auto; }
 .ta-header .brand .wm { font-family: var(--font-display); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 15px; color: var(--ta-black); }
-.ta-header nav { display: flex; gap: 14px; flex-shrink: 1; min-width: 0; overflow: hidden; }
+.ta-header nav { display: flex; gap: 8px; flex-shrink: 1; min-width: 0; }
 .ta-header nav a { font-family: var(--font-sans); font-size: 12px; color: var(--ta-black); border: none; padding: 0; white-space: nowrap; }
 .ta-header nav a:hover { color: var(--ta-gold-700); }
 .ta-header .right { display: flex; align-items: center; gap: 18px; }

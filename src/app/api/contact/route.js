@@ -30,10 +30,10 @@ async function sendEmailViaEmailJS(data) {
 
 export async function POST(request) {
   try {
-    const { name, phone, accidentType, contactTime, message } = await request.json();
+    const { name, phone, email, contactTime, message } = await request.json();
 
     // Validate required fields
-    if (!name || !phone || !accidentType || !message) {
+    if (!name || !phone || !email || !message) {
       return Response.json(
         { error: 'Faltan campos requeridos' },
         { status: 400 }
@@ -42,15 +42,14 @@ export async function POST(request) {
 
     // Insert into Supabase
     const { data, error } = await supabase
-      .from('contact_submissions')
+      .from('leads')
       .insert([
         {
           name,
+          email,
           phone,
-          accident_type: accidentType,
-          contact_time: contactTime || 'asap',
           message,
-          created_at: new Date().toISOString(),
+          urgency: contactTime || 'asap',
         },
       ])
       .select();
@@ -68,10 +67,10 @@ export async function POST(request) {
       await sendEmailViaEmailJS({
         to_email: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
         client_name: name,
+        client_email: email,
         client_phone: phone,
-        accident_type: accidentType,
-        contact_time: contactTime,
         message: message,
+        urgency: contactTime || 'asap',
         timestamp: new Date().toLocaleString('es-ES'),
       });
     } catch (emailError) {
