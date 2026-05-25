@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="mark">
             <img src="/assets/logo-mark.png" alt="" />
             <span className="wm">Team Abogados</span>
-            <p>Abogados de accidentes comprometidos con tu justicia.</p>
+            <p>Agencia de marketing y servicios de apoyo para firmas de abogados de accidentes.</p>
           </div>
           <div className="col">
             <h4>Navegación</h4>
@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
         <div className="legal">
           <span>© 2026 Team Abogados. Todos los derechos reservados.</span>
-          <span>Publicidad de servicios legales · Resultados pasados no garantizan resultados futuros.</span>
+          <span>Team Abogados no es un bufete de abogados y no ofrece servicios jurídicos directamente · Publicidad de servicios legales · Resultados pasados no garantizan resultados futuros.</span>
         </div>
       </div>
     </footer>

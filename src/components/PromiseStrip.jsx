@@ -3,10 +3,10 @@
 // PromiseStrip.jsx — four value props from teamabogados.com
 export default function PromiseStrip() {
   const items = [
-    { n: '01', h: 'Respuesta inmediata.',     p: 'Te contactamos en menos de diez minutos. Cuéntanos qué pasó y tomamos cartas en el asunto.' },
+    { n: '01', h: 'Respuesta inmediata.',     p: 'Te contactamos en menos de diez minutos y te referimos al abogado correcto para tu caso.' },
     { n: '02', h: 'Consulta confidencial.',   p: 'Cien por ciento gratis. Lo que nos cuentes queda entre nosotros — siempre.' },
-    { n: '03', h: 'No pagas si no ganamos.',  p: 'Sin pago anticipado y sin honorarios mientras tu caso esté abierto. Sólo cobramos si recuperamos.' },
-    { n: '04', h: 'Tu estatus no importa.',   p: 'Sin importar tu estatus migratorio, tienes derechos. Y nosotros los defendemos.' },
+    { n: '03', h: 'El abogado trabaja en contingencia.', p: 'El abogado que te asignamos no cobra por adelantado. Solo cobra si gana tu caso.' },
+    { n: '04', h: 'Tu estatus no importa.',   p: 'Sin importar tu estatus migratorio, tienes derechos. El abogado correcto puede defenderlos.' },
   ];
   return (
     <section className="ta-promise" id="services">

@@ -3,11 +3,11 @@
 // HowWeWork.jsx — "Cómo trabajamos" 5-step process, verbatim from site
 export default function HowWeWork() {
   const steps = [
-    { n: '01', h: 'Consulta gratis y sin compromiso',          p: 'Cuéntanos tu caso. Evaluamos tu situación de forma completamente gratuita y confidencial.' },
-    { n: '02', h: 'Investigación y evidencia sólida',           p: 'Recopilamos todas las pruebas necesarias para construir el caso más fuerte posible.' },
-    { n: '03', h: 'Conexión con especialistas médicos',          p: 'Te vinculamos con los mejores médicos para que recibas el tratamiento que necesitas.' },
-    { n: '04', h: 'Negociación agresiva contra el seguro',      p: 'No dejamos que la aseguradora te dé migajas. Peleamos por lo que te corresponde.' },
-    { n: '05', h: 'Tu cheque de compensación máxima',           p: 'Recibes tu compensación. Sólo cobramos si ganamos tu caso.' },
+    { n: '01', h: 'Consulta gratis y sin compromiso',         p: 'Cuéntanos tu caso. Evaluamos tu situación de forma completamente gratuita y confidencial.' },
+    { n: '02', h: 'Te asignamos al abogado ideal',            p: 'Evaluamos los detalles de tu accidente y te conectamos con la firma de nuestra red más adecuada para tu caso.' },
+    { n: '03', h: 'Conexión con especialistas médicos',       p: 'Tu abogado te vincula con los mejores médicos para que recibas el tratamiento que necesitas.' },
+    { n: '04', h: 'Negociación agresiva contra el seguro',   p: 'Tu abogado no deja que la aseguradora te dé migajas. Pelea por lo que te corresponde.' },
+    { n: '05', h: 'Tu cheque de compensación máxima',        p: 'Recibes tu compensación. El abogado solo cobra si gana tu caso.' },
   ];
   return (
     <section className="ta-how" id="how">

@@ -7,15 +7,15 @@ export default function Hero({ onContactClick }) {
       <div className="container">
         <div className="grid">
           <div>
-            <p className="eyebrow">No ganas, no pagas · Disponibles 24/7</p>
-            <h1>Abogados de accidentes que <em>luchan</em> por ti.</h1>
+            <p className="eyebrow">Consulta gratis · Sin compromiso · Disponibles 24/7</p>
+            <h1>Te conectamos con los mejores abogados de <em>accidentes.</em></h1>
             <p className="lede">
-              Después de un accidente, no estás solo. Nuestro equipo legal recupera la máxima
-              compensación para ti y tu familia. Sin importar tu estatus migratorio.
+              Después de un accidente, no estás solo. En Team Abogados te conectamos con el
+              abogado correcto para recuperar la máxima compensación. Sin importar tu estatus migratorio.
             </p>
             <div className="ctas">
               <button className="btn btn-primary" onClick={onContactClick}>
-                Consulta gratis ahora <span className="arr">→</span>
+                Hablar con un asesor <span className="arr">→</span>
               </button>
               <a className="btn btn-ghost" href="https://wa.me/16467246127" target="_blank" rel="noopener noreferrer">
                 WhatsApp →

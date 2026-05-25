@@ -18,16 +18,12 @@ export default function Header({ onContactClick }) {
           <span className="wm">Team Abogados</span>
         </a>
         <nav>
-          <a href="#services">Servicios</a>
           <a href="#why">¿Por qué nosotros?</a>
           <a href="#how">Cómo trabajamos</a>
-          <a href="#coverage">Cobertura</a>
-          <a href="#testimonials">Testimonios</a>
           <a href="#faq">Preguntas frecuentes</a>
           <a href="#ubicacion">Contacto</a>
         </nav>
         <div className="right">
-          <div className="lang"><span className="on">ES</span><span>·</span><span>EN</span></div>
           <a className="phone" href="tel:+16467246127">
             <i data-lucide="phone" width="14" height="14" strokeWidth="1.5"></i>
             (646) 724-6127

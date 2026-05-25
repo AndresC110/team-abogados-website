@@ -3,9 +3,9 @@
 // Testimonials.jsx — three quotes, verbatim from teamabogados.com
 export default function Testimonials() {
   const quotes = [
-    { q: 'Después del choque la aseguradora me quería dar una miseria. Team Abogados peleó por mí y conseguí una compensación increíble. Eternamente agradecido.', who: 'Carlos M.' },
-    { q: 'Soy inmigrante y tenía miedo de reclamar. Me explicaron todo, me consiguieron médicos y ganaron mi caso. No tuve que pagar nada por adelantado.', who: 'María G.' },
-    { q: 'Me caí en una obra de construcción. Team Abogados aplicó la ley del andamio y conseguí la máxima compensación. Un equipo de primera.', who: 'Roberto V.' },
+    { q: 'Después del choque la aseguradora me quería dar una miseria. Team Abogados me conectó con un abogado increíble que peleó por mí y conseguí una compensación que no esperaba. Eternamente agradecido.', who: 'Carlos M.' },
+    { q: 'Soy inmigrante y tenía miedo de reclamar. Team Abogados me explicó todo, me conectó con médicos y con un abogado que ganó mi caso. No tuve que pagar nada por adelantado.', who: 'María G.' },
+    { q: 'Me caí en una obra de construcción. Team Abogados me conectó con los abogados correctos que aplicaron la ley del andamio y conseguí la máxima compensación. Un servicio de primera.', who: 'Roberto V.' },
   ];
   return (
     <section className="ta-testimonials" id="testimonials">

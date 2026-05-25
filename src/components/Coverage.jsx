@@ -13,8 +13,8 @@ export default function Coverage() {
             <p className="eyebrow">Cobertura</p>
             <h2>Estamos cerca <em>de ti.</em></h2>
             <p className="cov-lede">
-              Cobertura total en las principales ciudades y regiones de Nueva York y Nueva Jersey.
-              Sin importar tu estatus migratorio — tienes derechos y nosotros los defendemos.
+              Nuestra red de abogados cubre las principales ciudades y regiones de Nueva York y Nueva Jersey.
+              Sin importar tu estatus migratorio — tienes derechos y el abogado correcto puede defenderlos.
             </p>
           </div>
           <ul className="cov-list">

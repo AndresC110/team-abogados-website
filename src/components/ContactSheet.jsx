@@ -63,7 +63,7 @@ export default function ContactSheet({ open, onClose }) {
           <Fragment>
             <p className="eyebrow">Consulta gratis</p>
             <h2>Cuéntanos <em>qué pasó.</em></h2>
-            <p className="lede">Un abogado del equipo te llama dentro de los próximos diez minutos. En español, sin compromiso.</p>
+            <p className="lede">Un asesor del equipo te llama dentro de los próximos diez minutos y te conecta con el abogado ideal para tu caso. En español, sin compromiso.</p>
             {error && <div style={{ color: 'var(--ta-gold-700)', marginBottom: 12 }}>{error}</div>}
             <form ref={formRef} onSubmit={submit}>
               <div className="field">
