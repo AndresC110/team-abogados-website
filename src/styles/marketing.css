@@ -250,7 +250,10 @@ html { scroll-behavior: smooth; }
   .ta-location .loc-map { min-height: 340px; }
   .ta-hero .grid, .ta-section .head, .cov-grid { grid-template-columns: 1fr; gap: 32px; }
   .ta-promise .grid, .ta-promise .grid.grid-4, .ta-practice, .ta-why, .ta-footer .grid, .t-grid, .cov-list { grid-template-columns: 1fr; gap: 24px; }
-  .ta-header nav { display: none; }
+  .ta-header nav   { display: none; }
+  .ta-header .phone { display: none; }
+  .ta-header .lang  { display: none; }
+  .ta-header .btn   { font-size: 13px; padding: 8px 16px; }
   .how-step { grid-template-columns: 1fr; gap: 8px; }
   .how-num { font-size: 44px; }
   .ta-why { grid-template-columns: 1fr; }

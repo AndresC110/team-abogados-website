@@ -18,6 +18,14 @@ import '@/styles/marketing.css';
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
 
+  // Always start at the top on page load / reload
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   useEffect(() => {
     // Initialize Lucide icons
     if (typeof window !== 'undefined' && window.lucide) {
