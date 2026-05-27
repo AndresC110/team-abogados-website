@@ -101,18 +101,20 @@ export async function POST(request) {
       return Response.json({ error: 'Nombre, teléfono y correo son requeridos.' }, { status: 400 });
     }
 
-    let dbOk = false;
     let emailOk = false;
 
-    // Save to Supabase
+    // Save to Supabase — critical path, failure returns 500
     try {
       await saveToSupabase({ name, phone, email, contactTime, message });
-      dbOk = true;
     } catch (dbErr) {
       console.error('[Contact API] DB save failed:', dbErr.message);
+      return Response.json(
+        { error: 'No pudimos guardar tu mensaje. Por favor intenta de nuevo.' },
+        { status: 500 }
+      );
     }
 
-    // Send email notification
+    // Send email notification — non-critical, log only
     try {
       await sendEmailViaEmailJS({ name, phone, email, contactTime, message });
       emailOk = true;
@@ -120,9 +122,9 @@ export async function POST(request) {
       console.error('[Contact API] Email send failed:', emailErr.message);
     }
 
-    console.log('[Contact API] Done. dbOk:', dbOk, '| emailOk:', emailOk);
+    console.log('[Contact API] Done. emailOk:', emailOk);
 
-    return Response.json({ success: true, dbOk, emailOk });
+    return Response.json({ success: true, emailOk });
   } catch (err) {
     console.error('[Contact API] Unexpected error:', err);
     return Response.json({ error: 'Error procesando la solicitud.' }, { status: 500 });
