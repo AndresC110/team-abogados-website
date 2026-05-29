@@ -24,6 +24,26 @@ function FlagUS() {
   );
 }
 
+// Inline SVG icons — no CDN dependency, always render correctly
+function MenuIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="3" y1="5"  x2="17" y2="5"  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="3" y1="10" x2="17" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="3" y1="15" x2="17" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="5"  y1="5"  x2="15" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="15" y1="5"  x2="5"  y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
 export default function Header({ onContactClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,11 +56,12 @@ export default function Header({ onContactClick }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Refresh Lucide icons for other components when lang changes
   useEffect(() => {
     if (typeof window !== 'undefined' && window.lucide) {
       window.lucide.createIcons();
     }
-  }, [menuOpen, lang]);
+  }, [lang]);
 
   const handleNavClick = () => setMenuOpen(false);
 
@@ -70,35 +91,37 @@ export default function Header({ onContactClick }) {
               <FlagUS /> <span className="lang-label">EN</span>
             </button>
           </div>
+
           {/* Phone — desktop only */}
           <a className="phone" href="tel:+16467246127">
             <i data-lucide="phone" width="14" height="14" strokeWidth="1.5"></i>
             (646) 724-6127
           </a>
+
           {/* CTA — always visible, smaller on mobile */}
           <button className="btn btn-primary" onClick={onContactClick}>
-            {tx.cta}
-            <span className="arr">→</span>
+            {tx.cta}<span className="arr">→</span>
           </button>
-          {/* Hamburger — mobile only */}
+
+          {/* Hamburger — mobile only, inline SVG so it always renders */}
           <button
             className="hamburger"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen(prev => !prev)}
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
           >
-            <i data-lucide={menuOpen ? 'x' : 'menu'} width="20" height="20" strokeWidth="1.5"></i>
+            {menuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
       </div>
 
-      {/* Mobile nav panel — only nav links */}
+      {/* Mobile nav panel — nav links only */}
       <div className={`mobile-nav${menuOpen ? ' open' : ''}`} aria-hidden={!menuOpen}>
         <nav className="mobile-nav-links">
-          <a href="#why"        onClick={handleNavClick}>{tx.nav.why}</a>
-          <a href="#how"        onClick={handleNavClick}>{tx.nav.how}</a>
-          <a href="#faq"        onClick={handleNavClick}>{tx.nav.faq}</a>
-          <a href="#ubicacion"  onClick={handleNavClick}>{tx.nav.contact}</a>
+          <a href="#why"       onClick={handleNavClick}>{tx.nav.why}</a>
+          <a href="#how"       onClick={handleNavClick}>{tx.nav.how}</a>
+          <a href="#faq"       onClick={handleNavClick}>{tx.nav.faq}</a>
+          <a href="#ubicacion" onClick={handleNavClick}>{tx.nav.contact}</a>
         </nav>
       </div>
     </header>
