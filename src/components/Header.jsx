@@ -6,7 +6,7 @@ import t from '@/lib/translations';
 
 function FlagES() {
   return (
-    <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 2, display: 'block', flexShrink: 0 }}>
+    <svg width="18" height="12" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 2, display: 'block', flexShrink: 0 }}>
       <rect width="20" height="14" fill="#c60b1e"/>
       <rect y="3.5" width="20" height="7" fill="#ffc400"/>
     </svg>
@@ -15,7 +15,7 @@ function FlagES() {
 
 function FlagUS() {
   return (
-    <svg width="20" height="14" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 2, display: 'block', flexShrink: 0 }}>
+    <svg width="18" height="12" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 2, display: 'block', flexShrink: 0 }}>
       {Array.from({ length: 13 }).map((_, i) => (
         <rect key={i} x="0" y={i * (14 / 13)} width="20" height={14 / 13 + 0.1} fill={i % 2 === 0 ? '#B22234' : '#FFFFFF'} />
       ))}
@@ -42,13 +42,7 @@ export default function Header({ onContactClick }) {
     }
   }, [menuOpen, lang]);
 
-  // Close menu on nav link click
   const handleNavClick = () => setMenuOpen(false);
-
-  const handleContactClick = () => {
-    setMenuOpen(false);
-    onContactClick();
-  };
 
   return (
     <header className={`ta-header${menuOpen ? ' menu-open' : ''}`} style={scrolled && !menuOpen ? { boxShadow: 'var(--shadow-sm)' } : {}}>
@@ -58,7 +52,7 @@ export default function Header({ onContactClick }) {
           <span className="wm">Team Abogados</span>
         </a>
 
-        {/* Desktop nav */}
+        {/* Desktop nav — hidden on mobile */}
         <nav>
           <a href="#why">{tx.nav.why}</a>
           <a href="#how">{tx.nav.how}</a>
@@ -69,56 +63,43 @@ export default function Header({ onContactClick }) {
         <div className="right">
           <div className="lang">
             <button className={lang === 'es' ? 'on' : ''} onClick={() => setLang('es')}>
-              <FlagES /> ES
+              <FlagES /> <span className="lang-label">ES</span>
             </button>
             <span className="sep">|</span>
             <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>
-              <FlagUS /> EN
+              <FlagUS /> <span className="lang-label">EN</span>
             </button>
           </div>
+          {/* Phone — desktop only */}
           <a className="phone" href="tel:+16467246127">
             <i data-lucide="phone" width="14" height="14" strokeWidth="1.5"></i>
             (646) 724-6127
           </a>
-          {/* Desktop CTA — hidden on mobile */}
-          <button className="btn btn-primary header-cta-desktop" onClick={onContactClick}>
+          {/* CTA — always visible, smaller on mobile */}
+          <button className="btn btn-primary" onClick={onContactClick}>
             {tx.cta}
             <span className="arr">→</span>
           </button>
-          {/* Hamburger — shown on mobile only */}
+          {/* Hamburger — mobile only */}
           <button
             className="hamburger"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
           >
-            <i data-lucide={menuOpen ? 'x' : 'menu'} width="22" height="22" strokeWidth="1.5"></i>
+            <i data-lucide={menuOpen ? 'x' : 'menu'} width="20" height="20" strokeWidth="1.5"></i>
           </button>
         </div>
       </div>
 
-      {/* Mobile nav panel */}
+      {/* Mobile nav panel — only nav links */}
       <div className={`mobile-nav${menuOpen ? ' open' : ''}`} aria-hidden={!menuOpen}>
         <nav className="mobile-nav-links">
-          <a href="#why"   onClick={handleNavClick}>{tx.nav.why}</a>
-          <a href="#how"   onClick={handleNavClick}>{tx.nav.how}</a>
-          <a href="#faq"   onClick={handleNavClick}>{tx.nav.faq}</a>
-          <a href="#ubicacion" onClick={handleNavClick}>{tx.nav.contact}</a>
+          <a href="#why"        onClick={handleNavClick}>{tx.nav.why}</a>
+          <a href="#how"        onClick={handleNavClick}>{tx.nav.how}</a>
+          <a href="#faq"        onClick={handleNavClick}>{tx.nav.faq}</a>
+          <a href="#ubicacion"  onClick={handleNavClick}>{tx.nav.contact}</a>
         </nav>
-        <div className="mobile-nav-cta">
-          <button className="btn btn-primary" onClick={handleContactClick}>
-            {tx.cta} <span className="arr">→</span>
-          </button>
-          <a className="btn btn-ghost" href="https://wa.me/16467246127" target="_blank" rel="noopener noreferrer" onClick={handleNavClick}>
-            WhatsApp →
-          </a>
-        </div>
-        <div className="mobile-nav-phone">
-          <a href="tel:+16467246127">
-            <i data-lucide="phone" width="14" height="14" strokeWidth="1.5"></i>
-            (646) 724-6127
-          </a>
-        </div>
       </div>
     </header>
   );
