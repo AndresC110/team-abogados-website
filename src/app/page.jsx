@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { LanguageProvider } from '@/context/LanguageContext';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import PromiseStrip from '@/components/PromiseStrip';
@@ -18,7 +19,6 @@ import '@/styles/marketing.css';
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
 
-  // Always start at the top on page load / reload
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.history.scrollRestoration = 'manual';
@@ -27,14 +27,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Initialize Lucide icons
     if (typeof window !== 'undefined' && window.lucide) {
       window.lucide.createIcons();
     }
   }, [contactOpen]);
 
   return (
-    <>
+    <LanguageProvider>
       <Header onContactClick={() => setContactOpen(true)} />
       <main>
         <Hero onContactClick={() => setContactOpen(true)} />
@@ -48,6 +47,6 @@ export default function Home() {
       </main>
       <Footer />
       <ContactSheet open={contactOpen} onClose={() => setContactOpen(false)} />
-    </>
+    </LanguageProvider>
   );
 }

@@ -1,13 +1,12 @@
 'use client';
 
-// PromiseStrip.jsx — four value props from teamabogados.com
+import { useLanguage } from '@/context/LanguageContext';
+import t from '@/lib/translations';
+
 export default function PromiseStrip() {
-  const items = [
-    { n: '01', h: 'Respuesta inmediata.',     p: 'Te contactamos en menos de diez minutos y te referimos al abogado correcto para tu caso.' },
-    { n: '02', h: 'Consulta confidencial.',   p: 'Cien por ciento gratis. Lo que nos cuentes queda entre nosotros — siempre.' },
-    { n: '03', h: 'El abogado trabaja en contingencia.', p: 'El abogado que te asignamos no cobra por adelantado. Solo cobra si gana tu caso.' },
-    { n: '04', h: 'Tu estatus no importa.',   p: 'Sin importar tu estatus migratorio, tienes derechos. El abogado correcto puede defenderlos.' },
-  ];
+  const { lang } = useLanguage();
+  const items = t[lang].promise.items;
+
   return (
     <section className="ta-promise" id="services">
       <div className="container">
@@ -24,4 +23,3 @@ export default function PromiseStrip() {
     </section>
   );
 }
-

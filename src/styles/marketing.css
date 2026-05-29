@@ -30,8 +30,11 @@ html { scroll-behavior: smooth; }
 .ta-header nav a { font-family: var(--font-sans); font-size: 12px; color: var(--ta-black); border: none; padding: 0; white-space: nowrap; }
 .ta-header nav a:hover { color: var(--ta-gold-700); }
 .ta-header .right { display: flex; align-items: center; gap: 18px; }
-.ta-header .lang { font-family: var(--font-display); font-size: 11px; letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted); display: flex; gap: 6px; }
-.ta-header .lang .on { color: var(--ta-black); }
+.ta-header .lang { font-family: var(--font-display); font-size: 11px; letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted); display: flex; align-items: center; gap: 4px; }
+.ta-header .lang button { background: none; border: none; cursor: pointer; font-family: var(--font-display); font-size: 12px; letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted); padding: 4px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; transition: color var(--dur-fast) var(--ease-out); }
+.ta-header .lang button:hover { color: var(--ta-black); }
+.ta-header .lang button.on { color: var(--ta-black); font-weight: 600; }
+.ta-header .lang .sep { color: var(--fg-muted); opacity: 0.35; font-size: 10px; }
 .ta-header .phone { font-family: var(--font-sans); font-weight: 500; font-size: 14px; color: var(--ta-black); display: inline-flex; align-items: center; gap: 8px; border: none; }
 .ta-header .phone i { color: var(--accent); }
 
@@ -252,7 +255,7 @@ html { scroll-behavior: smooth; }
   .ta-promise .grid, .ta-promise .grid.grid-4, .ta-practice, .ta-why, .ta-footer .grid, .t-grid, .cov-list { grid-template-columns: 1fr; gap: 24px; }
   .ta-header nav   { display: none; }
   .ta-header .phone { display: none; }
-  .ta-header .lang  { display: none; }
+  .ta-header .lang button { font-size: 11px; padding: 3px 5px; }
   .ta-header .btn   { font-size: 13px; padding: 8px 16px; }
   .how-step { grid-template-columns: 1fr; gap: 8px; }
   .how-num { font-size: 44px; }

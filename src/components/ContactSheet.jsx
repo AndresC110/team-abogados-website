@@ -1,8 +1,12 @@
 'use client';
 import { useState, useEffect, useRef, Fragment } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import t from '@/lib/translations';
 
-// ContactSheet.jsx — right-side intake modal
 export default function ContactSheet({ open, onClose }) {
+  const { lang } = useLanguage();
+  const tx = t[lang].sheet;
+
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -57,66 +61,63 @@ export default function ContactSheet({ open, onClose }) {
     <Fragment>
       <div className={`sheet-scrim ${open ? 'open' : ''}`} onClick={onClose}></div>
       <aside className={`sheet ${open ? 'open' : ''}`} aria-hidden={!open}>
-        <button className="x" onClick={onClose} aria-label="Cerrar">
+        <button className="x" onClick={onClose} aria-label={tx.close_aria}>
           <i data-lucide="x" width="20" height="20" strokeWidth="1.5"></i>
         </button>
 
         {!sent ? (
           <Fragment>
-            <p className="eyebrow">Consulta gratis</p>
-            <h2>Cuéntanos <em>qué pasó.</em></h2>
-            <p className="lede">Un asesor del equipo te llama dentro de los próximos diez minutos y te conecta con el abogado ideal para tu caso. En español, sin compromiso.</p>
+            <p className="eyebrow">{tx.eyebrow}</p>
+            <h2>{tx.h2} <em>{tx.h2_em}</em></h2>
+            <p className="lede">{tx.lede}</p>
             {error && <div style={{ color: 'var(--ta-gold-700)', marginBottom: 12 }}>{error}</div>}
             <form ref={formRef} onSubmit={submit}>
               <div className="field">
-                <label>Nombre completo</label>
-                <input name="name" required placeholder="Como aparece en tu identificación" />
+                <label>{tx.labels.name}</label>
+                <input name="name" required placeholder={tx.placeholders.name} />
               </div>
               <div className="field">
-                <label>Teléfono</label>
-                <input name="phone" required type="tel" placeholder="(___) ___-____" />
+                <label>{tx.labels.phone}</label>
+                <input name="phone" required type="tel" placeholder={tx.placeholders.phone} />
               </div>
               <div className="field">
-                <label>Correo electrónico</label>
-                <input name="email" required type="email" placeholder="tu@correo.com" />
+                <label>{tx.labels.email}</label>
+                <input name="email" required type="email" placeholder={tx.placeholders.email} />
               </div>
               <div className="field">
-                <label>¿Cuándo desea ser contactado?</label>
+                <label>{tx.labels.when}</label>
                 <select name="contactTime" defaultValue="asap">
-                  <option value="asap">Lo antes posible</option>
-                  <option value="morning">Esta mañana (8 a 12 h)</option>
-                  <option value="afternoon">Esta tarde (12 a 18 h)</option>
-                  <option value="evening">Esta noche (18 a 22 h)</option>
-                  <option value="tomorrow">Mañana</option>
-                  <option value="weekend">Este fin de semana</option>
+                  <option value="asap">{tx.whenOptions.asap}</option>
+                  <option value="morning">{tx.whenOptions.morning}</option>
+                  <option value="afternoon">{tx.whenOptions.afternoon}</option>
+                  <option value="evening">{tx.whenOptions.evening}</option>
+                  <option value="tomorrow">{tx.whenOptions.tomorrow}</option>
+                  <option value="weekend">{tx.whenOptions.weekend}</option>
                 </select>
               </div>
               <div className="field">
-                <label>Cuéntanos qué pasó</label>
-                <textarea name="message" required placeholder="Escribe con tus propias palabras. Sin formalidades."></textarea>
+                <label>{tx.labels.message}</label>
+                <textarea name="message" required placeholder={tx.placeholders.message}></textarea>
               </div>
               <button className="btn btn-primary submit" type="submit" disabled={loading}>
-                {loading ? 'Enviando...' : 'Enviar mensaje'} <span className="arr">→</span>
+                {loading ? tx.sending : tx.submit} <span className="arr">→</span>
               </button>
               <p className="terms">
-                Al enviar este formulario aceptas nuestra <a href="#">política de privacidad</a>.
-                Tu estatus migratorio no es relevante para tu caso y nunca será compartido fuera del equipo.
+                {tx.terms} <a href="#">{tx.terms_link}</a>{tx.terms_suffix}
               </p>
             </form>
           </Fragment>
         ) : (
           <div className="success">
-            <p className="ok">Mensaje recibido</p>
-            <h2>Te llamamos en <em>menos de diez minutos.</em></h2>
+            <p className="ok">{tx.success.ok}</p>
+            <h2>{tx.success.h2} <em>{tx.success.h2_em}</em></h2>
             <p className="lede">
-              Si necesitas hablar antes, marca directamente al <strong>(646) 724-6127</strong>.
-              Contestamos las veinticuatro horas, en español.
+              {tx.success.lede} <strong>(646) 724-6127</strong>{tx.success.lede_suffix}
             </p>
-            <button className="btn btn-outline" onClick={onClose}>Cerrar</button>
+            <button className="btn btn-outline" onClick={onClose}>{tx.success.close}</button>
           </div>
         )}
       </aside>
     </Fragment>
   );
 }
-

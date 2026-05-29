@@ -1,33 +1,33 @@
 'use client';
 
-// Testimonials.jsx — three quotes, verbatim from teamabogados.com
+import { useLanguage } from '@/context/LanguageContext';
+import t from '@/lib/translations';
+
 export default function Testimonials() {
-  const quotes = [
-    { q: 'Después del choque la aseguradora me quería dar una miseria. Team Abogados me conectó con un abogado increíble que peleó por mí y conseguí una compensación que no esperaba. Eternamente agradecido.', who: 'Carlos M.' },
-    { q: 'Soy inmigrante y tenía miedo de reclamar. Team Abogados me explicó todo, me conectó con médicos y con un abogado que ganó mi caso. No tuve que pagar nada por adelantado.', who: 'María G.' },
-    { q: 'Me caí en una obra de construcción. Team Abogados me conectó con los abogados correctos que aplicaron la ley del andamio y conseguí la máxima compensación. Un servicio de primera.', who: 'Roberto V.' },
-  ];
+  const { lang } = useLanguage();
+  const tx = t[lang].testimonials;
+
   return (
     <section className="ta-testimonials" id="testimonials">
       <div className="container">
         <div className="head">
           <div>
-            <p className="eyebrow">Testimonios</p>
-            <h2>Lo que dicen <em>nuestros clientes.</em></h2>
+            <p className="eyebrow">{tx.eyebrow}</p>
+            <h2>{tx.h2} <em>{tx.h2_em}</em></h2>
           </div>
         </div>
         <div className="t-grid">
-          {quotes.map((t, i) => (
+          {tx.items.map((item, i) => (
             <figure key={i} className="t-card">
-              <div className="t-stars" aria-label="cinco estrellas">
+              <div className="t-stars" aria-label={tx.aria}>
                 {Array.from({ length: 5 }).map((_, j) => (
                   <i key={j} data-lucide="star" width="16" height="16" strokeWidth="1.5" fill="currentColor"></i>
                 ))}
               </div>
-              <blockquote>{t.q}</blockquote>
+              <blockquote>{item.q}</blockquote>
               <figcaption>
                 <span className="dash"></span>
-                {t.who}
+                {item.who}
               </figcaption>
             </figure>
           ))}
@@ -36,4 +36,3 @@ export default function Testimonials() {
     </section>
   );
 }
-
