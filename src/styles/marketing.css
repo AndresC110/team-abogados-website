@@ -37,6 +37,13 @@ html { scroll-behavior: smooth; }
 .ta-header .lang .sep { color: var(--fg-muted); opacity: 0.35; font-size: 10px; }
 .ta-header .phone { font-family: var(--font-sans); font-weight: 500; font-size: 14px; color: var(--ta-black); display: inline-flex; align-items: center; gap: 8px; border: none; }
 .ta-header .phone i { color: var(--accent); }
+/* Hamburger — hidden on desktop */
+.ta-header .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--ta-black); align-items: center; justify-content: center; border-radius: var(--r-sm); transition: background var(--dur-fast) var(--ease-out); }
+.ta-header .hamburger:hover { background: var(--ta-black-06, rgba(0,0,0,0.06)); }
+/* Mobile nav panel — hidden on desktop */
+.mobile-nav { display: none; }
+/* When menu is open, remove the header bottom border transparency */
+.ta-header.menu-open { border-bottom-color: var(--line); }
 
 /* ====== Hero ====== */
 .ta-hero { padding: 96px 0 80px; position: relative; }
@@ -249,14 +256,11 @@ html { scroll-behavior: smooth; }
 .faq-a p { font-family: var(--font-sans); font-size: 15px; line-height: 1.7; color: var(--fg-muted); padding: 0 0 24px; margin: 0; }
 
 @media (max-width: 880px) {
+  /* ---- Layout ---- */
   .ta-location .loc-grid { grid-template-columns: 1fr; gap: 32px; }
   .ta-location .loc-map { min-height: 340px; }
   .ta-hero .grid, .ta-section .head, .cov-grid { grid-template-columns: 1fr; gap: 32px; }
   .ta-promise .grid, .ta-promise .grid.grid-4, .ta-practice, .ta-why, .ta-footer .grid, .t-grid, .cov-list { grid-template-columns: 1fr; gap: 24px; }
-  .ta-header nav   { display: none; }
-  .ta-header .phone { display: none; }
-  .ta-header .lang button { font-size: 11px; padding: 3px 5px; }
-  .ta-header .btn   { font-size: 13px; padding: 8px 16px; }
   .how-step { grid-template-columns: 1fr; gap: 8px; }
   .how-num { font-size: 44px; }
   .ta-why { grid-template-columns: 1fr; }
@@ -264,4 +268,71 @@ html { scroll-behavior: smooth; }
   .cov-grid { grid-template-columns: 1fr; gap: 32px; }
   .ta-how .head { grid-template-columns: 1fr; gap: 24px; }
   .ta-testimonials .head h2, .cov-info h2 { font-size: 36px; }
+
+  /* ---- Header mobile ---- */
+  .ta-header nav             { display: none; }
+  .ta-header .phone          { display: none; }
+  .ta-header .header-cta-desktop { display: none; }
+  .ta-header .hamburger      { display: inline-flex; }
+  .ta-header .right          { gap: 10px; }
+  .ta-header .lang button    { font-size: 11px; padding: 3px 5px; }
+  .ta-header .brand .wm      { display: none; }
+  .ta-header .brand img      { height: 34px; }
+
+  /* ---- Mobile nav panel ---- */
+  .mobile-nav {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+    opacity: 0;
+    background: color-mix(in oklab, var(--ta-cream) 97%, transparent);
+    border-top: 1px solid var(--line);
+  }
+  .mobile-nav.open {
+    max-height: 420px;
+    opacity: 1;
+  }
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0 4px;
+  }
+  .mobile-nav-links a {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ta-black);
+    text-decoration: none;
+    border: none;
+    padding: 14px var(--gutter);
+    border-bottom: 1px solid var(--line);
+    display: block;
+    transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  }
+  .mobile-nav-links a:hover { color: var(--ta-gold-700); background: rgba(0,0,0,0.02); }
+  .mobile-nav-links a:last-child { border-bottom: none; }
+  .mobile-nav-cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 16px var(--gutter);
+    border-top: 1px solid var(--line);
+  }
+  .mobile-nav-phone {
+    padding: 10px var(--gutter) 16px;
+    border-top: 1px solid var(--line);
+  }
+  .mobile-nav-phone a {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ta-black);
+    text-decoration: none;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mobile-nav-phone a i { color: var(--accent); }
 }
