@@ -22,7 +22,11 @@ export default function Home() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.history.scrollRestoration = 'manual';
-      window.scrollTo(0, 0);
+      // Strip the hash so the browser has no anchor to restore on reload
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     }
   }, []);
 
