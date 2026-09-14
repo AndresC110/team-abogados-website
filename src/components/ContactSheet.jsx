@@ -1,8 +1,12 @@
 'use client';
 import { useState, useEffect, useRef, Fragment } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/translations';
 
-// ContactSheet.jsx — right-side intake modal
 export default function ContactSheet({ open, onClose }) {
+  const { lang } = useLanguage();
+  const T = translations[lang].contact;
+
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -10,10 +14,7 @@ export default function ContactSheet({ open, onClose }) {
 
   useEffect(() => {
     if (!open) {
-      setTimeout(() => {
-        setSent(false);
-        setError('');
-      }, 400);
+      setTimeout(() => { setSent(false); setError(''); }, 400);
     }
   }, [open]);
 
@@ -21,7 +22,6 @@ export default function ContactSheet({ open, onClose }) {
     e.preventDefault();
     setLoading(true);
     setError('');
-
     try {
       const formData = new FormData(formRef.current);
       const data = {
@@ -30,22 +30,18 @@ export default function ContactSheet({ open, onClose }) {
         email: formData.get('email'),
         contactTime: formData.get('contactTime'),
         message: formData.get('message'),
+        company: formData.get('company'), // honeypot — real users leave this empty
       };
-
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-
-      if (!response.ok) {
-        throw new Error('Error al enviar el formulario');
-      }
-
+      const json = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(json.error || 'Error al enviar el formulario');
       setSent(true);
     } catch (err) {
       setError(err.message || 'Error procesando la solicitud');
-      console.error('Form error:', err);
     } finally {
       setLoading(false);
     }
@@ -61,60 +57,65 @@ export default function ContactSheet({ open, onClose }) {
 
         {!sent ? (
           <Fragment>
-            <p className="eyebrow">Consulta gratis</p>
-            <h2>Cuéntanos <em>qué pasó.</em></h2>
-            <p className="lede">Un asesor del equipo te llama dentro de los próximos diez minutos y te conecta con el abogado ideal para tu caso. En español, sin compromiso.</p>
+            <p className="eyebrow">{T.eyebrow}</p>
+            <h2>{T.h2}<em>{T.h2em}</em></h2>
+            <p className="lede">{T.lede}</p>
             {error && <div style={{ color: 'var(--ta-gold-700)', marginBottom: 12 }}>{error}</div>}
             <form ref={formRef} onSubmit={submit}>
+              {/* Honeypot: hidden from humans, irresistible to bots. Kept out of
+                  the tab order and the accessibility tree. */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+              />
               <div className="field">
-                <label>Nombre completo</label>
-                <input name="name" required placeholder="Como aparece en tu identificación" />
+                <label>{T.labelName}</label>
+                <input name="name" required placeholder={T.phName} />
               </div>
               <div className="field">
-                <label>Teléfono</label>
-                <input name="phone" required type="tel" placeholder="(___) ___-____" />
+                <label>{T.labelPhone}</label>
+                <input name="phone" required type="tel" placeholder={T.phPhone} />
               </div>
               <div className="field">
-                <label>Correo electrónico</label>
-                <input name="email" required type="email" placeholder="tu@correo.com" />
+                <label>{T.labelEmail}</label>
+                <input name="email" required type="email" placeholder={T.phEmail} />
               </div>
               <div className="field">
-                <label>¿Cuándo desea ser contactado?</label>
+                <label>{T.labelWhen}</label>
                 <select name="contactTime" defaultValue="asap">
-                  <option value="asap">Lo antes posible</option>
-                  <option value="morning">Esta mañana (8 a 12 h)</option>
-                  <option value="afternoon">Esta tarde (12 a 18 h)</option>
-                  <option value="evening">Esta noche (18 a 22 h)</option>
-                  <option value="tomorrow">Mañana</option>
-                  <option value="weekend">Este fin de semana</option>
+                  <option value="asap">{T.optAsap}</option>
+                  <option value="morning">{T.optMorning}</option>
+                  <option value="afternoon">{T.optAfternoon}</option>
+                  <option value="evening">{T.optEvening}</option>
+                  <option value="tomorrow">{T.optTomorrow}</option>
+                  <option value="weekend">{T.optWeekend}</option>
                 </select>
               </div>
               <div className="field">
-                <label>Cuéntanos qué pasó</label>
-                <textarea name="message" placeholder="Escribe con tus propias palabras. Sin formalidades."></textarea>
+                <label>{T.labelMsg}</label>
+                <textarea name="message" required placeholder={T.phMsg}></textarea>
               </div>
               <button className="btn btn-primary submit" type="submit" disabled={loading}>
-                {loading ? 'Enviando...' : 'Enviar mensaje'} <span className="arr">→</span>
+                {loading ? T.submitting : T.submit} <span className="arr">→</span>
               </button>
               <p className="terms">
-                Al enviar este formulario aceptas nuestra <a href="#">política de privacidad</a>.
-                Tu estatus migratorio no es relevante para tu caso y nunca será compartido fuera del equipo.
+                {T.terms} <a href="#">{T.termsLink}</a>. {T.termsEnd}
               </p>
             </form>
           </Fragment>
         ) : (
           <div className="success">
-            <p className="ok">Mensaje recibido</p>
-            <h2>Te llamamos en <em>menos de diez minutos.</em></h2>
-            <p className="lede">
-              Si necesitas hablar antes, marca directamente al <strong>(646) 724-6127</strong>.
-              Contestamos las veinticuatro horas, en español.
-            </p>
-            <button className="btn btn-outline" onClick={onClose}>Cerrar</button>
+            <p className="ok">{T.successOk}</p>
+            <h2>{T.successH2}<em>{T.successH2em}</em></h2>
+            <p className="lede">{T.successLede}</p>
+            <button className="btn btn-outline" onClick={onClose}>{T.successClose}</button>
           </div>
         )}
       </aside>
     </Fragment>
   );
 }
-

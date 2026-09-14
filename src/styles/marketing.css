@@ -6,7 +6,7 @@ body { margin: 0; }
 html { scroll-behavior: smooth; }
 
 /* Sticky-header offset so anchor jumps land below the nav */
-#top, #services, #why, #how, #coverage, #testimonials, #faq, #ubicacion {
+#top, #services, #why, #how, #coverage, #testimonials, #video, #faq, #ubicacion {
   scroll-margin-top: 88px;
 }
 
@@ -34,6 +34,49 @@ html { scroll-behavior: smooth; }
 .ta-header .lang .on { color: var(--ta-black); }
 .ta-header .phone { font-family: var(--font-sans); font-weight: 500; font-size: 14px; color: var(--ta-black); display: inline-flex; align-items: center; gap: 8px; border: none; }
 .ta-header .phone i { color: var(--accent); }
+
+/* ====== Header — lang toggle ====== */
+.lang { display: flex; align-items: center; gap: 4px; }
+.lang-btn { background: none; border: none; cursor: pointer; font-family: var(--font-display); font-size: 11px; letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--fg-muted); padding: 2px 4px; transition: color var(--dur-fast) var(--ease-out); }
+.lang-btn.on { color: var(--ta-black); font-weight: 600; }
+.lang-btn:hover { color: var(--ta-gold-700); }
+.lang-sep { font-family: var(--font-display); font-size: 11px; color: var(--fg-subtle); }
+
+/* ====== Mobile header right (lang + CTA + hamburger) — hidden on desktop ====== */
+.mob-hdr-right { display: none; align-items: center; gap: 8px; flex-shrink: 0; }
+.mob-cta-btn { padding: 7px 11px; font-size: 12px; white-space: nowrap; }
+.mob-toggle { background: none; border: none; cursor: pointer; color: var(--ta-black); padding: 5px; flex-shrink: 0; display: flex; align-items: center; }
+
+/* ====== Mobile nav drawer — hidden on desktop ====== */
+.mob-nav {
+  display: none;
+  position: fixed;
+  top: 76px; left: 0; right: 0;
+  background: var(--ta-cream);
+  border-bottom: 1px solid var(--line);
+  z-index: 48;
+  padding: 0 var(--gutter) 32px;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  max-height: calc(100vh - 76px);
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+}
+.mob-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Scrim behind mobile nav */
+.mob-scrim { position: fixed; inset: 0; top: 76px; z-index: 47; background: rgba(11,11,12,0.35); backdrop-filter: blur(2px); }
+
+.mob-links { display: flex; flex-direction: column; border-top: 1px solid var(--line); margin-bottom: 28px; }
+.mob-links a { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--ta-black); padding: 18px 0; border-bottom: 1px solid var(--line); border-left: none; display: block; letter-spacing: -0.01em; transition: color var(--dur-fast) var(--ease-out); }
+.mob-links a:hover { color: var(--ta-gold-900); }
+
+.mob-actions { display: flex; flex-direction: column; gap: 18px; }
+.mob-phone { font-family: var(--font-sans); font-weight: 500; font-size: 16px; color: var(--ta-black); display: inline-flex; align-items: center; gap: 10px; border: none; }
+.mob-phone i { color: var(--accent); }
 
 /* ====== Hero ====== */
 .ta-hero { padding: 96px 0 80px; position: relative; }
@@ -234,6 +277,21 @@ html { scroll-behavior: smooth; }
 .t-card figcaption { font-family: var(--font-sans); font-size: 14px; color: var(--fg-muted); display: flex; align-items: center; gap: 10px; margin-top: auto; }
 .t-card .dash { width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
 
+/* ====== Video Section ====== */
+.ta-video { background: var(--ta-black); color: var(--ta-cream); padding: 112px 0; }
+.ta-video__head { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+.ta-video__title { font-family: var(--font-serif); font-weight: 500; font-size: clamp(36px, 4.5vw, 60px); line-height: 1.05; letter-spacing: -0.02em; margin: 14px 0 20px; color: var(--ta-cream); text-wrap: balance; }
+.ta-video__title em { font-style: italic; color: var(--accent); font-weight: 400; }
+.ta-video__lede { font-family: var(--font-serif); font-style: italic; font-size: 18px; line-height: 1.55; color: var(--ta-black-20); margin: 0; }
+.ta-video__player-wrap { position: relative; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-ink); border: 1px solid var(--ta-black-80); background: var(--ta-black-90); max-width: 900px; margin: 0 auto; }
+.ta-video__player { display: block; width: 100%; height: auto; border-radius: var(--r-lg); }
+.ta-video__cta { display: flex; justify-content: center; margin-top: 48px; }
+
+@media (max-width: 880px) {
+  .ta-video { padding: 72px 0; }
+  .ta-video__head { margin-bottom: 36px; }
+}
+
 /* ====== FAQ ====== */
 .ta-faq { background: var(--ta-cream); }
 .faq-list { display: flex; flex-direction: column; max-width: 920px; margin: 0 auto; border-top: 1px solid var(--line); }
@@ -246,11 +304,26 @@ html { scroll-behavior: smooth; }
 .faq-a p { font-family: var(--font-sans); font-size: 15px; line-height: 1.7; color: var(--fg-muted); padding: 0 0 24px; margin: 0; }
 
 @media (max-width: 880px) {
+  /* Header — hide desktop nav & right, show mobile elements */
+  .ta-header nav { display: none; }
+  .ta-header .right { display: none; }
+  .mob-hdr-right { display: flex; }
+  .mob-nav { display: flex; }
+  /* Prevent wordmark overflow on small screens */
+  .ta-header .brand .wm { font-size: 12px; letter-spacing: 0.08em; }
+  /* Reduce CTA button on mobile so brand has room */
+  .mob-cta-btn { padding: 7px 10px; font-size: 11px; }
+  .mob-hdr-right { gap: 6px; }
+  /* Prevent any section from overflowing horizontally */
+  .ta-hero, .ta-promise, .ta-section, .ta-how, .ta-coverage,
+  .ta-testimonials, .ta-video, .ta-location, .ta-footer { overflow-x: hidden; }
+  .mob-scrim { display: block; }
+
+  /* Layout resets */
   .ta-location .loc-grid { grid-template-columns: 1fr; gap: 32px; }
   .ta-location .loc-map { min-height: 340px; }
   .ta-hero .grid, .ta-section .head, .cov-grid { grid-template-columns: 1fr; gap: 32px; }
   .ta-promise .grid, .ta-promise .grid.grid-4, .ta-practice, .ta-why, .ta-footer .grid, .t-grid, .cov-list { grid-template-columns: 1fr; gap: 24px; }
-  .ta-header nav { display: none; }
   .how-step { grid-template-columns: 1fr; gap: 8px; }
   .how-num { font-size: 44px; }
   .ta-why { grid-template-columns: 1fr; }
@@ -258,4 +331,14 @@ html { scroll-behavior: smooth; }
   .cov-grid { grid-template-columns: 1fr; gap: 32px; }
   .ta-how .head { grid-template-columns: 1fr; gap: 24px; }
   .ta-testimonials .head h2, .cov-info h2 { font-size: 36px; }
+}
+
+/* Very small screens — shrink everything so brand + mob-hdr-right don't overlap */
+@media (max-width: 440px) {
+  .ta-header .brand img { height: 28px; }
+  .ta-header .brand .wm { font-size: 10px; letter-spacing: 0.04em; }
+  .ta-header .brand { gap: 6px; }
+  .mob-cta-btn { padding: 5px 8px; font-size: 10px; }
+  .mob-hdr-right { gap: 4px; }
+  .lang-btn { font-size: 10px; padding: 2px 2px; }
 }

@@ -8,15 +8,25 @@ import WhyUs from '@/components/WhyUs';
 import HowWeWork from '@/components/HowWeWork';
 import Coverage from '@/components/Coverage';
 import Testimonials from '@/components/Testimonials';
+import VideoSection from '@/components/VideoSection';
 import FAQ from '@/components/FAQ';
 import Location from '@/components/Location';
 import Footer from '@/components/Footer';
 import ContactSheet from '@/components/ContactSheet';
+import { LanguageProvider } from '@/context/LanguageContext';
 import '@/styles/colors_and_type.css';
 import '@/styles/marketing.css';
 
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
+
+  // Always scroll to top on page load / reload
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual';
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  }, []);
 
   useEffect(() => {
     // Initialize Lucide icons
@@ -26,7 +36,7 @@ export default function Home() {
   }, [contactOpen]);
 
   return (
-    <>
+    <LanguageProvider>
       <Header onContactClick={() => setContactOpen(true)} />
       <main>
         <Hero onContactClick={() => setContactOpen(true)} />
@@ -35,11 +45,12 @@ export default function Home() {
         <HowWeWork />
         <Coverage />
         <Testimonials />
+        <VideoSection onContactClick={() => setContactOpen(true)} />
         <FAQ />
         <Location />
       </main>
       <Footer />
       <ContactSheet open={contactOpen} onClose={() => setContactOpen(false)} />
-    </>
+    </LanguageProvider>
   );
 }
