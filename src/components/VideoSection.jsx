@@ -16,7 +16,10 @@ export default function VideoSection({ onContactClick }) {
         <div className="ta-video__player-wrap">
           <video
             className="ta-video__player"
-            src="/videos/ta3.mp4"
+            src="/videos/team-abogados.mp4"
+            poster="/videos/team-abogados-poster.jpg"
+            width={1920}
+            height={1080}
             controls
             preload="metadata"
             playsInline
