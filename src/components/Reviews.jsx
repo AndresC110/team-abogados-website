@@ -85,7 +85,7 @@ export default function Reviews() {
             {list.length > 0 && (
               <div className="rv-score">
                 <strong>{avg.toFixed(1)}</strong>
-                <div><Stars value={Math.round(avg)} size={18} /><span>{list.length} {list.length === 1 ? T.one : T.many}</span></div>
+                <div><Stars value={Math.round(avg)} size={18} /><small className="rv-count">{list.length} {list.length === 1 ? T.one : T.many}</small></div>
               </div>
             )}
             <button type="button" className="btn btn-gold rv-btn" onClick={openForm}>{T.leave} <span className="arr">→</span></button>

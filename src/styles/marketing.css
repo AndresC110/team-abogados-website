@@ -447,7 +447,7 @@ html { scroll-behavior: smooth; }
 .rv-cta { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .rv-score { display: flex; align-items: center; gap: 12px; font-family: var(--font-sans); }
 .rv-score strong { font-family: var(--font-serif); font-size: 48px; font-weight: 500; line-height: 1; color: var(--ta-black); }
-.rv-score span { display: block; font-size: 13px; color: var(--fg-muted); margin-top: 4px; }
+.rv-score .rv-count { display: block; font-size: 13px; color: var(--fg-muted); margin-top: 4px; }
 .rv-stars { display: inline-flex; gap: 3px; color: var(--accent); }
 .rv-btn { font-size: 15px; padding: 16px 28px; box-shadow: 0 12px 28px -14px rgba(107,79,27,0.6); }
 .rv-empty { text-align: center; background: var(--ta-paper); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 56px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
