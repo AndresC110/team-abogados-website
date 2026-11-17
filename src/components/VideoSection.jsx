@@ -14,9 +14,12 @@ export default function VideoSection({ onContactClick }) {
           <p className="ta-video__lede">{T.lede}</p>
         </div>
         <div className="ta-video__player-wrap">
+          {/* Un video por idioma: el audio es el mismo (español); cambian subtítulos, formulario y cierre.
+              key={lang} hace que el reproductor se recargue al cambiar de idioma. */}
           <video
+            key={lang}
             className="ta-video__player"
-            src="/videos/team-abogados.mp4"
+            src={lang === 'en' ? '/videos/team-abogados-en.mp4' : '/videos/team-abogados.mp4'}
             poster="/videos/team-abogados-poster.jpg"
             width={1920}
             height={1080}
