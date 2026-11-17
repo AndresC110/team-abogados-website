@@ -487,3 +487,37 @@ html { scroll-behavior: smooth; }
 .rv-thanks p { color: var(--ta-black-60); margin: 0 0 10px; }
 @media (max-width: 900px) { .rv-grid { grid-template-columns: 1fr; } .ta-reviews { padding: 72px 0; } }
 @media (max-width: 640px) { .rv-row { flex-direction: column; gap: 0; } .rv-dialog { padding: 28px 20px 22px; } .rv-cta { width: 100%; } .rv-btn { width: 100%; justify-content: center; } }
+
+/* ---------- Invitacion a reseñar en la portada ---------- */
+@keyframes rv-chip-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes rv-chip-shine { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(260%) skewX(-18deg); } }
+@keyframes rv-star-pop { 0% { transform: scale(0.4); opacity: 0; } 70% { transform: scale(1.25); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes rv-chip-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,97,0); } 50% { box-shadow: 0 0 0 6px rgba(201,169,97,0.22); } }
+.rv-chip { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 12px; margin: 0 0 22px; border-radius: 999px; border: 1px solid rgba(154,122,46,0.45); background: var(--ta-paper); color: var(--ta-black); font-family: var(--font-sans); font-size: 14px; font-weight: 600; cursor: pointer; text-align: left; animation: rv-chip-in 600ms var(--ease-out) 250ms both, rv-chip-glow 1.6s ease-in-out 1.4s 2; transition: transform var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+.rv-chip::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 38%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.75), transparent); transform: translateX(-120%) skewX(-18deg); animation: rv-chip-shine 1.1s ease-in-out 1.1s 2; pointer-events: none; }
+.rv-chip:hover { transform: translateY(-1px); border-color: var(--ta-gold-700); }
+.rv-chip__stars { display: inline-flex; gap: 1px; color: var(--accent); }
+.rv-chip__stars svg { animation: rv-star-pop 420ms var(--ease-out) both; }
+.rv-chip__stars svg:nth-child(1) { animation-delay: 550ms; } .rv-chip__stars svg:nth-child(2) { animation-delay: 640ms; } .rv-chip__stars svg:nth-child(3) { animation-delay: 730ms; } .rv-chip__stars svg:nth-child(4) { animation-delay: 820ms; } .rv-chip__stars svg:nth-child(5) { animation-delay: 910ms; }
+.rv-chip__arr { color: var(--ta-gold-700); transition: transform var(--dur-fast) var(--ease-out); }
+.rv-chip:hover .rv-chip__arr { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .rv-chip, .rv-chip::after, .rv-chip__stars svg { animation: none; } }
+@media (max-width: 640px) { .rv-chip { font-size: 13px; padding: 8px 14px 8px 10px; margin-bottom: 18px; } }
+
+/* ---------- Elegir como dejar la reseña ---------- */
+.rv-choose { display: flex; flex-direction: column; gap: 12px; }
+.rv-opt { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; padding: 16px 18px; border: 1px solid var(--ta-black-20); border-radius: 12px; background: #fff; cursor: pointer; text-align: left; font-family: var(--font-sans); color: var(--ta-black); transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
+.rv-opt:hover { border-color: var(--ta-black); box-shadow: 0 8px 20px -12px rgba(11,11,12,0.35); }
+.rv-opt b { display: block; font-size: 15px; }
+.rv-opt small { display: block; font-size: 13px; color: var(--ta-black-60); margin-top: 2px; line-height: 1.35; }
+.rv-opt--google { border-color: var(--ta-black); }
+.rv-opt__badge { margin-left: auto; flex-shrink: 0; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: var(--ta-gold-900); background: var(--ta-gold-100); border-radius: 999px; padding: 4px 9px; }
+.rv-opt__pen { width: 20px; text-align: center; font-size: 18px; color: var(--ta-black-60); }
+@media (max-width: 640px) { .rv-opt { padding: 14px; } .rv-opt__badge { position: absolute; top: -9px; right: 12px; } }
+
+/* ---------- Celular: aviso de cookies mas compacto ---------- */
+@media (max-width: 640px) {
+  .ta-cookies { padding: 10px; gap: 8px; border-radius: 16px; }
+  .ta-cookies__text { font-size: 12.5px; }
+  .ta-cookies__btn { padding: 9px 10px; font-size: 13px; }
+}

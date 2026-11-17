@@ -3,6 +3,18 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/translations';
 import { track } from '@/lib/consent';
+import { GOOGLE_REVIEW_URL, OPEN_REVIEW_EVENT } from '@/lib/reviews';
+
+function GoogleG() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+    </svg>
+  );
+}
 
 // Reseñas reales de clientes. Se muestran solo las aprobadas (ver /api/reviews).
 // Cualquiera puede dejar la suya con el botón; queda pendiente hasta revisarla.
@@ -26,7 +38,7 @@ export default function Reviews() {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
-  const [state, setState] = useState('idle'); // idle | sending | sent
+  const [state, setState] = useState('idle'); // choose | idle | sending | sent
   const [error, setError] = useState('');
   const formRef = useRef(null);
 
@@ -42,7 +54,28 @@ export default function Reviews() {
     return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
   }, [open]);
 
-  const openForm = () => { setOpen(true); setState('idle'); setError(''); setRating(0); track('abrir_resena'); };
+  const openForm = () => {
+    setOpen(true); setState(GOOGLE_REVIEW_URL ? 'choose' : 'idle'); setError(''); setRating(0); track('abrir_resena');
+  };
+  const openRef = useRef(openForm);
+  openRef.current = openForm;
+
+  // Abrir desde la invitación de la portada, y directamente con teamabogados.com/resena (?resena).
+  useEffect(() => {
+    const h = () => openRef.current();
+    window.addEventListener(OPEN_REVIEW_EVENT, h);
+    let t;
+    const q = new URLSearchParams(window.location.search);
+    if (q.has('resena') || q.has('review') || window.location.hash === '#dejar-resena') {
+      t = setTimeout(() => {
+        document.getElementById('resenas')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        openRef.current();
+      }, 450);
+    }
+    return () => { window.removeEventListener(OPEN_REVIEW_EVENT, h); clearTimeout(t); };
+  }, []);
+
+  const goGoogle = () => { track('resena_google'); window.open(GOOGLE_REVIEW_URL, '_blank', 'noopener'); setOpen(false); };
 
   const submit = async (e) => {
     e.preventDefault();
@@ -122,7 +155,21 @@ export default function Reviews() {
         <div className="rv-modal" role="dialog" aria-modal="true" aria-label={T.formTitle} onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}>
           <div className="rv-dialog">
             <button type="button" className="rv-x" onClick={() => setOpen(false)} aria-label={T.close}>×</button>
-            {state === 'sent' ? (
+            {state === 'choose' ? (
+              <div className="rv-choose">
+                <h3>{T.chooseTitle}</h3>
+                <p className="rv-sub">{T.chooseSub}</p>
+                <button type="button" className="rv-opt rv-opt--google" onClick={goGoogle}>
+                  <GoogleG />
+                  <span><b>{T.google}</b><small>{T.googleHint}</small></span>
+                  <span className="rv-opt__badge">{T.recommended}</span>
+                </button>
+                <button type="button" className="rv-opt" onClick={() => setState('idle')}>
+                  <span className="rv-opt__pen" aria-hidden="true">✎</span>
+                  <span><b>{T.here}</b><small>{T.hereHint}</small></span>
+                </button>
+              </div>
+            ) : state === 'sent' ? (
               <div className="rv-thanks">
                 <Stars value={rating} size={28} />
                 <h3>{T.thanksTitle}</h3>

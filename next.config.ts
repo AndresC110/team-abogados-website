@@ -36,6 +36,13 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Enlaces cortos para pedir reseñas (por WhatsApp, tarjeta, QR): abren el formulario directamente.
+  async redirects() {
+    return [
+      { source: '/resena', destination: '/?resena=1', permanent: false },
+      { source: '/review', destination: '/?resena=1', permanent: false },
+    ];
+  },
   async headers() {
     return [
       {

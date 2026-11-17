@@ -16,6 +16,7 @@ export const translations = {
       h1em: 'accidentes.',
       lede: 'Después de un accidente, no estás solo. En Team Abogados te conectamos con el abogado correcto para recuperar la máxima compensación. Sin importar tu estatus migratorio.',
       cta: 'Hablar con un asesor',
+      reviewChip: '¿Ya te ayudamos? Deja tu reseña',
       stats: [
         { k: 'Asesoría',           v: '100% gratis' },
         { k: 'Sin pago anticipado', v: '$0' },
@@ -86,6 +87,9 @@ export const translations = {
       thanksTitle: '¡Gracias por tu reseña!', thanksBody: 'La revisaremos y la publicaremos pronto.',
       close: 'Cerrar',
       errRating: 'Elige de 1 a 5 estrellas.', errGeneric: 'No se pudo enviar tu reseña. Intenta de nuevo.',
+      chooseTitle: 'Deja tu reseña', chooseSub: 'Elige cómo prefieres dejarla. Toma menos de un minuto.',
+      google: 'Con tu cuenta de Google', googleHint: 'Se publica en nuestro perfil de Google con tu nombre.', recommended: 'Recomendado',
+      here: 'Aquí en el sitio', hereHint: 'Sin cuenta. La revisamos antes de publicarla.',
     },
     video: {
       eyebrow: 'En acción',
@@ -196,6 +200,7 @@ export const translations = {
       h1em: 'attorneys.',
       lede: 'After an accident, you are not alone. At Team Abogados we connect you with the right attorney to recover maximum compensation. Regardless of your immigration status.',
       cta: 'Talk to an advisor',
+      reviewChip: 'Did we help you? Leave a review',
       stats: [
         { k: 'Advisory',          v: '100% free' },
         { k: 'No upfront cost',   v: '$0' },
@@ -266,6 +271,9 @@ export const translations = {
       thanksTitle: 'Thank you for your review!', thanksBody: 'We will review it and publish it soon.',
       close: 'Close',
       errRating: 'Choose 1 to 5 stars.', errGeneric: 'Your review could not be sent. Please try again.',
+      chooseTitle: 'Leave a review', chooseSub: 'Choose how you would like to leave it. It takes less than a minute.',
+      google: 'With your Google account', googleHint: 'Posted on our Google profile under your name.', recommended: 'Recommended',
+      here: 'Here on the site', hereHint: 'No account needed. We review it before publishing.',
     },
     video: {
       eyebrow: 'In action',
