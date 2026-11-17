@@ -177,8 +177,8 @@ function Doc() {
           </div>
         </div>
         <article className="ta-legal__doc">
-          <a href="/">{C.back}</a>
-          <p className="eyebrow" style={{ marginTop: 28 }}>{C.eyebrow}</p>
+          <p style={{ margin: 0 }}><a href="/">{C.back}</a></p>
+          <div style={{ marginTop: 28 }}><p className="eyebrow">{C.eyebrow}</p></div>
           <h1>{C.title}</h1>
           <p className="updated">{UPDATED[lang]}</p>
           {C.sections.map(([id, h, blocks]) => (
