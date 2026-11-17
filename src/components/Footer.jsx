@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="col">
             <h4>{T.legalTitle}</h4>
             <a href="/privacidad">{T.legalLinks.privacy}</a>
-            <a href="#">{T.legalLinks.terms}</a>
+            <a href="/terminos">{T.legalLinks.terms}</a>
             <a href="/privacidad#aviso-legal">{T.legalLinks.disclaimer}</a>
             {CLARITY_ID && (
               <button type="button" className="ta-footer__linkbtn" onClick={openCookieSettings}>{T.cookieSettings}</button>

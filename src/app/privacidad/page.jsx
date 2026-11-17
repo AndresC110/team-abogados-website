@@ -1,203 +1,211 @@
 'use client';
 
-import { Fragment } from 'react';
-import { LanguageProvider, useLanguage } from '@/context/LanguageContext';
-import CookieConsent from '@/components/CookieConsent';
-import { CLARITY_ID, openCookieSettings } from '@/lib/consent';
+import { LanguageProvider } from '@/context/LanguageContext';
+import LegalPage from '@/components/LegalPage';
 import '@/styles/colors_and_type.css';
 import '@/styles/marketing.css';
 
-const UPDATED = { es: 'Última actualización: 17 de noviembre de 2026', en: 'Last updated: November 17, 2026' };
-
 const COPY = {
   es: {
-    back: '← Volver al inicio',
-    eyebrow: 'Legal',
+    eyebrow: 'Legal · Privacidad',
     title: 'Política de privacidad',
+    updated: 'Vigente desde el 17 de noviembre de 2026',
+    intro: 'Esta política describe cómo Team Abogados recoge, usa, comparte y protege la información personal de quienes visitan teamabogados.com o se comunican con nosotros, y las opciones que tienes sobre esa información.',
+    summary: {
+      title: 'Lo esencial',
+      items: [
+        'Usamos los datos que nos envías en el formulario para responderte y conectarte con un abogado independiente que pueda atender tu caso.',
+        'La analítica del sitio (Microsoft Clarity) solo se activa si la aceptas en el aviso de cookies, y puedes retirarla cuando quieras.',
+        'No vendemos tu información personal.',
+        'Puedes pedirnos ver, corregir o borrar tus datos llamando al (646) 724-6127.',
+        'Team Abogados no es un bufete de abogados.',
+      ],
+    },
     sections: [
       ['quienes', 'Quiénes somos', [
-        'Team Abogados es una agencia de marketing y servicios de apoyo para firmas de abogados de accidentes, con oficina en 2322 Arthur Avenue, Suite 207, Bronx, NY 10458. Teléfono: (646) 724-6127.',
-        'Esta política explica qué datos recogemos en teamabogados.com, para qué los usamos y qué control tienes sobre ellos.',
+        'Team Abogados ("Team Abogados", "nosotros") es una agencia de marketing y servicios de apoyo para firmas de abogados de accidentes, con oficina en 2322 Arthur Avenue, Suite 207, Bronx, NY 10458. Somos responsables de la información personal que se trata a través de este sitio.',
       ]],
-      ['datos', 'Qué datos recogemos', [
+      ['datos', 'Información que recogemos', [
+        { lead: 'Información que nos das directamente' },
+        'Cuando usas el formulario de contacto, nos llamas o nos escribes por WhatsApp: tu nombre, teléfono, correo electrónico, el horario en que prefieres que te contactemos y lo que nos cuentas sobre tu situación. Te pedimos que no incluyas datos médicos ni detalles que no sean necesarios para una primera conversación.',
+        { lead: 'Información que se recoge automáticamente' },
+        'Si aceptas las cookies de analítica: páginas visitadas, clics, desplazamiento, movimientos del cursor, tipo de dispositivo y navegador, idioma, ubicación aproximada derivada de la dirección IP y grabaciones de la sesión. Lo que escribes en formularios se oculta en esas grabaciones. Si no las aceptas, no se recoge esta información.',
+        'Además, nuestro proveedor de alojamiento registra datos técnicos básicos (dirección IP, fecha y hora, página solicitada) necesarios para que el sitio funcione y sea seguro.',
+      ]],
+      ['uso', 'Cómo usamos la información', [
         { list: [
-          'Datos que tú nos das en el formulario de contacto: nombre, teléfono, correo electrónico, horario preferido de contacto y el mensaje sobre lo que pasó.',
-          'Datos de uso del sitio, solo si aceptas las cookies de analítica: páginas visitadas, clics, desplazamiento, movimiento del ratón, tipo de dispositivo y navegador, ubicación aproximada (a partir de la dirección IP) y grabaciones de la sesión. Lo que escribes en los formularios queda oculto en esas grabaciones.',
-          'Datos técnicos necesarios para que el sitio funcione y sea seguro (por ejemplo, registros del servidor de alojamiento).',
+          'Para responderte, evaluar de forma preliminar tu situación y conectarte con un abogado o profesional independiente de nuestra red.',
+          'Para comunicarnos contigo por el medio que nos indiques sobre la solicitud que hiciste.',
+          'Para entender cómo se usa el sitio y mejorar su contenido y funcionamiento.',
+          'Para proteger el sitio frente a fraudes, abusos y envíos automatizados.',
+          'Para cumplir obligaciones legales y atender requerimientos de autoridades.',
         ] },
       ]],
-      ['uso', 'Para qué los usamos', [
+      ['compartir', 'Con quién la compartimos', [
+        'No vendemos ni alquilamos tu información personal. La compartimos solo en estos casos:',
         { list: [
-          'Responderte y conectarte con un abogado independiente de nuestra red que pueda atender tu caso.',
-          'Entender cómo se usa el sitio (qué secciones se leen, dónde se detiene la gente, qué partes confunden) para mejorarlo.',
-          'Proteger el sitio contra abusos y envíos automáticos.',
-        ] },
-        'No vendemos tus datos personales.',
-      ]],
-      ['compartir', 'Con quién los compartimos', [
-        { list: [
-          'Con la firma de abogados independiente y los profesionales que atiendan tu caso, cuando nos pides que te conectemos.',
-          'Con proveedores que nos prestan servicios y solo usan los datos para ello: Vercel (alojamiento del sitio), Supabase (base de datos del formulario), Resend (avisos por correo) y Microsoft Clarity (analítica, solo con tu permiso).',
-          'Con autoridades, cuando la ley lo exija.',
+          'Con la firma de abogados independiente y los profesionales que atiendan tu caso, cuando nos pides que te pongamos en contacto con ellos.',
+          'Con proveedores que nos prestan servicios técnicos y solo pueden usar los datos para prestárnoslos (ver «Proveedores» en la información de referencia al final de esta página).',
+          'Cuando la ley lo exija, o para proteger nuestros derechos, los de nuestros usuarios o los de terceros.',
+          'En caso de reorganización, fusión o venta de la empresa, sujeto a esta política.',
         ] },
       ]],
       ['cookies', 'Cookies y analítica', [
-        'Usamos Microsoft Clarity para ver de forma agregada cómo se navega el sitio, mediante mapas de calor y grabaciones de sesión. Clarity solo se activa si pulsas «Aceptar» en el aviso de cookies; si pulsas «Rechazar», no se carga y no se crea ninguna cookie de analítica.',
-        { table: [
-          ['Nombre', 'Proveedor', 'Para qué', 'Duración'],
-          ['ta_consent', 'Team Abogados', 'Recordar si aceptaste o rechazaste la analítica (necesaria)', 'Hasta que la borres'],
-          ['ta_lang', 'Team Abogados', 'Recordar el idioma elegido (necesaria)', 'Hasta que la borres'],
-          ['_clck', 'Microsoft Clarity', 'Identificar de forma anónima al mismo navegador entre visitas', '1 año'],
-          ['_clsk', 'Microsoft Clarity', 'Unir las páginas de una misma visita', '1 día'],
-          ['CLID, MUID y similares', 'Microsoft', 'Identificador de Clarity entre sitios web', 'Hasta 1 año'],
-        ] },
-        'Microsoft trata los datos de Clarity según su propia declaración de privacidad: privacy.microsoft.com.',
+        'Usamos Microsoft Clarity para ver de forma agregada cómo se navega el sitio, mediante mapas de calor y grabaciones de sesión. Clarity solo se carga si pulsas «Aceptar» en el aviso de cookies. Si pulsas «Rechazar», no se carga y no se guarda ninguna cookie de analítica. Puedes cambiar tu decisión en cualquier momento.',
         { settings: true },
+        'El detalle de cada cookie está en la información de referencia al final de esta página.',
       ]],
-      ['conservacion', 'Cuánto tiempo los guardamos', [
-        'Guardamos los datos del formulario mientras sean necesarios para atender tu solicitud y cumplir obligaciones legales. Los datos de analítica de Clarity se conservan según los plazos de Microsoft (las grabaciones, por lo general, unos 30 días).',
+      ['opciones', 'Tus opciones y derechos', [
+        'Puedes pedirnos acceso a la información que tenemos sobre ti, que la corrijamos o la borremos, o que dejemos de contactarte. Para hacerlo, llámanos al (646) 724-6127 o escríbenos por el formulario de contacto indicando tu solicitud. Podemos pedirte datos para verificar tu identidad antes de atenderla.',
+        'También puedes retirar tu consentimiento a la analítica desde «Configurar cookies» en el pie de página, o borrar las cookies desde tu navegador.',
       ]],
-      ['derechos', 'Tus derechos', [
-        'Puedes pedirnos ver, corregir o borrar tus datos, o que dejemos de contactarte, llamando al (646) 724-6127 o escribiéndonos por el formulario de contacto. Puedes retirar tu consentimiento a la analítica en cualquier momento desde «Configurar cookies».',
+      ['conservacion', 'Cuánto tiempo la conservamos', [
+        'Conservamos la información de contacto durante el tiempo necesario para atender tu solicitud y, después, mientras lo exijan nuestras obligaciones legales o sea razonablemente necesario para resolver disputas. Los datos de analítica se conservan según los plazos de Microsoft Clarity.',
       ]],
       ['seguridad', 'Seguridad', [
-        'Usamos conexiones cifradas (HTTPS) y limitamos el acceso a los datos a las personas que los necesitan. Ningún sistema es totalmente seguro, pero aplicamos medidas razonables para proteger tu información.',
+        'Usamos conexiones cifradas (HTTPS), limitamos el acceso a la información a las personas que la necesitan y trabajamos con proveedores que aplican medidas de seguridad reconocidas. Ningún sistema es completamente seguro, por lo que no podemos garantizar una seguridad absoluta.',
       ]],
       ['menores', 'Menores de edad', [
-        'Este sitio no está dirigido a menores de 13 años y no recogemos a sabiendas datos de menores.',
-      ]],
-      ['aviso-legal', 'Aviso legal', [
-        'Team Abogados no es un bufete de abogados y no ofrece servicios jurídicos directamente. Los abogados con los que conectamos a los clientes son independientes. Este sitio es publicidad de servicios legales. Los resultados pasados no garantizan resultados futuros. Los videos del sitio son dramatizaciones.',
+        'Este sitio no está dirigido a menores de 13 años y no recogemos a sabiendas información de menores. Si crees que un menor nos ha enviado información, avísanos para borrarla.',
       ]],
       ['cambios', 'Cambios en esta política', [
-        'Si cambiamos esta política, publicaremos la nueva versión en esta página con la fecha de actualización.',
+        'Podemos actualizar esta política. Publicaremos la versión vigente en esta página con su fecha. Si los cambios son importantes, lo indicaremos de forma visible en el sitio.',
+      ]],
+      ['contacto', 'Contacto', [
+        'Para cualquier pregunta sobre esta política o sobre tu información: Team Abogados, 2322 Arthur Avenue, Suite 207, Bronx, NY 10458 · (646) 724-6127.',
       ]],
     ],
-    settings: 'Cambiar mis preferencias de cookies',
+    appendix: {
+      id: 'referencia',
+      title: 'Información de referencia',
+      sections: [
+        ['proveedores', 'Proveedores', [
+          { dl: [
+            ['Vercel Inc.', 'Alojamiento del sitio web.'],
+            ['Supabase Inc.', 'Base de datos donde se guardan los mensajes del formulario.'],
+            ['Resend (Plus Five Five, Inc.)', 'Envío de avisos internos por correo cuando llega un mensaje.'],
+            ['Microsoft Corporation (Clarity)', 'Analítica del sitio, solo con tu consentimiento. Política de Microsoft: privacy.microsoft.com.'],
+          ] },
+        ]],
+        ['detalle-cookies', 'Detalle de cookies y almacenamiento local', [
+          { table: [
+            ['Nombre', 'Proveedor', 'Finalidad', 'Duración'],
+            ['ta_consent', 'Team Abogados', 'Recordar si aceptaste o rechazaste la analítica (necesaria).', 'Hasta que la borres'],
+            ['ta_lang', 'Team Abogados', 'Recordar el idioma elegido (necesaria).', 'Hasta que la borres'],
+            ['_clck', 'Microsoft Clarity', 'Reconocer de forma anónima el mismo navegador entre visitas.', '1 año'],
+            ['_clsk', 'Microsoft Clarity', 'Unir las páginas vistas en una misma visita.', '1 día'],
+            ['CLID, MUID, ANONCHK, SM', 'Microsoft', 'Identificadores y comprobaciones técnicas de Clarity.', 'Hasta 1 año'],
+          ] },
+        ]],
+        ['aviso-legal', 'Aviso legal', [
+          { note: 'Team Abogados no es un bufete de abogados y no presta servicios jurídicos directamente. Los abogados con los que conectamos a los clientes son independientes. Este sitio constituye publicidad de servicios legales. Los resultados anteriores no garantizan resultados futuros. Los videos del sitio son dramatizaciones.' },
+        ]],
+      ],
+    },
   },
   en: {
-    back: '← Back to home',
-    eyebrow: 'Legal',
+    eyebrow: 'Legal · Privacy',
     title: 'Privacy Policy',
+    updated: 'Effective November 17, 2026',
+    intro: 'This policy describes how Team Abogados collects, uses, shares and protects personal information of people who visit teamabogados.com or contact us, and the choices you have about that information.',
+    summary: {
+      title: 'The essentials',
+      items: [
+        'We use what you send us through the form to reply to you and connect you with an independent attorney who can handle your case.',
+        'Site analytics (Microsoft Clarity) only turn on if you accept them in the cookie notice, and you can withdraw that at any time.',
+        'We do not sell your personal information.',
+        'You can ask us to see, correct or delete your data by calling (646) 724-6127.',
+        'Team Abogados is not a law firm.',
+      ],
+    },
     sections: [
       ['quienes', 'Who we are', [
-        'Team Abogados is a marketing and support-services agency for personal injury law firms, with an office at 2322 Arthur Avenue, Suite 207, Bronx, NY 10458. Phone: (646) 724-6127.',
-        'This policy explains what data we collect on teamabogados.com, what we use it for, and the control you have over it.',
+        'Team Abogados ("Team Abogados", "we", "us") is a marketing and support-services agency for personal injury law firms, with an office at 2322 Arthur Avenue, Suite 207, Bronx, NY 10458. We are responsible for the personal information processed through this site.',
       ]],
-      ['datos', 'What we collect', [
-        { list: [
-          'Information you give us in the contact form: name, phone, email, preferred contact time and your message about what happened.',
-          'Site usage data, only if you accept analytics cookies: pages visited, clicks, scrolling, mouse movement, device and browser type, approximate location (from your IP address) and session recordings. Anything you type into forms is hidden in those recordings.',
-          'Technical data needed to run and secure the site (for example, hosting server logs).',
-        ] },
+      ['datos', 'Information we collect', [
+        { lead: 'Information you give us' },
+        'When you use the contact form, call us or message us on WhatsApp: your name, phone, email, preferred contact time and what you tell us about your situation. Please do not include medical details or anything not needed for a first conversation.',
+        { lead: 'Information collected automatically' },
+        'If you accept analytics cookies: pages visited, clicks, scrolling, cursor movement, device and browser type, language, approximate location derived from your IP address, and session recordings. Anything you type into forms is hidden in those recordings. If you do not accept them, this information is not collected.',
+        'Our hosting provider also logs basic technical data (IP address, date and time, page requested) needed to run and secure the site.',
       ]],
-      ['uso', 'How we use it', [
+      ['uso', 'How we use information', [
         { list: [
-          'To reply to you and connect you with an independent attorney in our network who can handle your case.',
-          'To understand how the site is used (which sections people read, where they stop, what is confusing) so we can improve it.',
-          'To protect the site against abuse and automated submissions.',
+          'To reply to you, make a preliminary review of your situation and connect you with an independent attorney or professional in our network.',
+          'To contact you through the channel you choose about the request you made.',
+          'To understand how the site is used and improve its content and performance.',
+          'To protect the site against fraud, abuse and automated submissions.',
+          'To comply with legal obligations and respond to lawful requests from authorities.',
         ] },
-        'We do not sell your personal information.',
       ]],
       ['compartir', 'Who we share it with', [
+        'We do not sell or rent your personal information. We share it only in these cases:',
         { list: [
-          'The independent law firm and professionals handling your case, when you ask us to connect you.',
-          'Service providers that work for us and use the data only for that purpose: Vercel (site hosting), Supabase (contact-form database), Resend (email notifications) and Microsoft Clarity (analytics, only with your permission).',
-          'Authorities, when required by law.',
+          'With the independent law firm and professionals handling your case, when you ask us to put you in touch with them.',
+          'With service providers that work for us and may only use the data to provide those services (see “Service providers” in the reference information at the end of this page).',
+          'When required by law, or to protect our rights or those of our users or others.',
+          'In a reorganization, merger or sale of the business, subject to this policy.',
         ] },
       ]],
       ['cookies', 'Cookies and analytics', [
-        'We use Microsoft Clarity to see, in aggregate, how people navigate the site through heatmaps and session recordings. Clarity only turns on if you click “Accept” in the cookie notice; if you click “Decline”, it is not loaded and no analytics cookies are created.',
-        { table: [
-          ['Name', 'Provider', 'Purpose', 'Duration'],
-          ['ta_consent', 'Team Abogados', 'Remember whether you accepted or declined analytics (necessary)', 'Until you clear it'],
-          ['ta_lang', 'Team Abogados', 'Remember your chosen language (necessary)', 'Until you clear it'],
-          ['_clck', 'Microsoft Clarity', 'Anonymously recognize the same browser across visits', '1 year'],
-          ['_clsk', 'Microsoft Clarity', 'Connect the pages of a single visit', '1 day'],
-          ['CLID, MUID and similar', 'Microsoft', 'Clarity identifier across websites', 'Up to 1 year'],
-        ] },
-        'Microsoft handles Clarity data under its own privacy statement: privacy.microsoft.com.',
+        'We use Microsoft Clarity to see, in aggregate, how people navigate the site, through heatmaps and session recordings. Clarity only loads if you click “Accept” in the cookie notice. If you click “Decline”, it is not loaded and no analytics cookies are stored. You can change your choice at any time.',
         { settings: true },
+        'Details for each cookie are in the reference information at the end of this page.',
+      ]],
+      ['opciones', 'Your choices and rights', [
+        'You can ask us for access to the information we hold about you, ask us to correct or delete it, or ask us to stop contacting you. To do so, call (646) 724-6127 or write to us through the contact form stating your request. We may ask for information to verify your identity first.',
+        'You can also withdraw your analytics consent from “Cookie settings” in the site footer, or delete cookies in your browser.',
       ]],
       ['conservacion', 'How long we keep it', [
-        'We keep contact-form data for as long as needed to handle your request and meet legal obligations. Clarity analytics data is kept according to Microsoft’s retention periods (recordings are generally kept about 30 days).',
-      ]],
-      ['derechos', 'Your rights', [
-        'You can ask us to see, correct or delete your data, or to stop contacting you, by calling (646) 724-6127 or writing to us through the contact form. You can withdraw your analytics consent at any time from “Cookie settings”.',
+        'We keep contact information for as long as needed to handle your request and, afterwards, for as long as our legal obligations require or as reasonably needed to resolve disputes. Analytics data is kept according to Microsoft Clarity’s retention periods.',
       ]],
       ['seguridad', 'Security', [
-        'We use encrypted connections (HTTPS) and limit access to data to the people who need it. No system is completely secure, but we use reasonable measures to protect your information.',
+        'We use encrypted connections (HTTPS), limit access to information to the people who need it, and work with providers that apply recognized security measures. No system is completely secure, so we cannot guarantee absolute security.',
       ]],
       ['menores', 'Children', [
-        'This site is not directed to children under 13 and we do not knowingly collect their data.',
-      ]],
-      ['aviso-legal', 'Legal disclaimer', [
-        'Team Abogados is not a law firm and does not provide legal services directly. The attorneys we connect clients with are independent. This site is legal services advertising. Past results do not guarantee future results. The videos on this site are dramatizations.',
+        'This site is not directed to children under 13 and we do not knowingly collect their information. If you believe a child has sent us information, let us know so we can delete it.',
       ]],
       ['cambios', 'Changes to this policy', [
-        'If we change this policy, we will post the new version on this page with the update date.',
+        'We may update this policy. We will post the current version on this page with its date. If changes are significant, we will say so visibly on the site.',
+      ]],
+      ['contacto', 'Contact', [
+        'For any question about this policy or your information: Team Abogados, 2322 Arthur Avenue, Suite 207, Bronx, NY 10458 · (646) 724-6127.',
       ]],
     ],
-    settings: 'Change my cookie preferences',
+    appendix: {
+      id: 'referencia',
+      title: 'Reference information',
+      sections: [
+        ['proveedores', 'Service providers', [
+          { dl: [
+            ['Vercel Inc.', 'Website hosting.'],
+            ['Supabase Inc.', 'Database where contact-form messages are stored.'],
+            ['Resend (Plus Five Five, Inc.)', 'Internal email notifications when a message arrives.'],
+            ['Microsoft Corporation (Clarity)', 'Site analytics, only with your consent. Microsoft’s policy: privacy.microsoft.com.'],
+          ] },
+        ]],
+        ['detalle-cookies', 'Cookie and local storage details', [
+          { table: [
+            ['Name', 'Provider', 'Purpose', 'Duration'],
+            ['ta_consent', 'Team Abogados', 'Remember whether you accepted or declined analytics (necessary).', 'Until you clear it'],
+            ['ta_lang', 'Team Abogados', 'Remember your chosen language (necessary).', 'Until you clear it'],
+            ['_clck', 'Microsoft Clarity', 'Anonymously recognize the same browser across visits.', '1 year'],
+            ['_clsk', 'Microsoft Clarity', 'Connect the pages viewed in a single visit.', '1 day'],
+            ['CLID, MUID, ANONCHK, SM', 'Microsoft', 'Clarity identifiers and technical checks.', 'Up to 1 year'],
+          ] },
+        ]],
+        ['aviso-legal', 'Legal disclaimer', [
+          { note: 'Team Abogados is not a law firm and does not provide legal services directly. The attorneys we connect clients with are independent. This site is legal services advertising. Past results do not guarantee future results. The videos on this site are dramatizations.' },
+        ]],
+      ],
+    },
   },
 };
-
-function Block({ item, settingsLabel }) {
-  if (typeof item === 'string') return <p>{item}</p>;
-  if (item.list) return <ul>{item.list.map((t) => <li key={t}>{t}</li>)}</ul>;
-  if (item.table) {
-    const [head, ...rows] = item.table;
-    return (
-      <div className="tbl">
-        <table>
-          <thead><tr>{head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
-          <tbody>{rows.map((r) => <tr key={r[0]}>{r.map((c, i) => <td key={i}>{c}</td>)}</tr>)}</tbody>
-        </table>
-      </div>
-    );
-  }
-  if (item.settings) {
-    return CLARITY_ID ? <p><button type="button" className="linkish" onClick={openCookieSettings}>{settingsLabel}</button></p> : null;
-  }
-  return null;
-}
-
-function Doc() {
-  const { lang, setLang } = useLanguage();
-  const C = COPY[lang];
-  return (
-    <div className="ta-legal">
-      <div className="container">
-        <div className="ta-legal__bar">
-          <a className="brand" href="/"><img src="/assets/logo-mark-black.png" alt="" />Team Abogados</a>
-          <div className="lang">
-            <button className={`lang-btn${lang === 'en' ? ' on' : ''}`} onClick={() => setLang('en')}>EN</button>
-            <span className="lang-sep">/</span>
-            <button className={`lang-btn${lang === 'es' ? ' on' : ''}`} onClick={() => setLang('es')}>ES</button>
-          </div>
-        </div>
-        <article className="ta-legal__doc">
-          <p style={{ margin: 0 }}><a href="/">{C.back}</a></p>
-          <div style={{ marginTop: 28 }}><p className="eyebrow">{C.eyebrow}</p></div>
-          <h1>{C.title}</h1>
-          <p className="updated">{UPDATED[lang]}</p>
-          {C.sections.map(([id, h, blocks]) => (
-            <Fragment key={id}>
-              <h2 id={id}>{h}</h2>
-              {blocks.map((b, i) => <Block key={i} item={b} settingsLabel={C.settings} />)}
-            </Fragment>
-          ))}
-        </article>
-      </div>
-      <CookieConsent />
-    </div>
-  );
-}
 
 export default function PrivacidadPage() {
   return (
     <LanguageProvider>
-      <Doc />
+      <LegalPage copy={COPY} current="privacy" />
     </LanguageProvider>
   );
 }

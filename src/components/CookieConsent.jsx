@@ -6,8 +6,8 @@ import {
   CLARITY_ID, OPEN_EVENT, readConsent, saveConsent, loadClarity, clearClarityCookies, track,
 } from '@/lib/consent';
 
-// Aviso de cookies: aparece hasta que la persona elige. "Aceptar" y "Rechazar"
-// tienen el mismo peso visual (rechazar debe ser igual de fácil que aceptar).
+// Aviso de cookies tipo notificación: una barra delgada y flotante abajo.
+// "Aceptar" y "Rechazar" tienen el mismo tamaño (rechazar debe ser igual de fácil).
 // Se puede volver a abrir desde "Configurar cookies" en el pie de página.
 export default function CookieConsent() {
   const { lang } = useLanguage();
@@ -45,14 +45,13 @@ export default function CookieConsent() {
   };
 
   return (
-    <div className="ta-cookies" role="dialog" aria-live="polite" aria-label={T.title}>
-      <div className="ta-cookies__text">
-        <strong>{T.title}</strong>
-        <p>{T.body} <a href="/privacidad">{T.more}</a></p>
-      </div>
+    <div className="ta-cookies" role="dialog" aria-live="polite" aria-label={T.label}>
+      <p className="ta-cookies__text">
+        {T.body} <a href="/privacidad#cookies">{T.more}</a>
+      </p>
       <div className="ta-cookies__btns">
-        <button className="btn btn-outline ta-cookies__btn" onClick={reject}>{T.reject}</button>
-        <button className="btn btn-primary ta-cookies__btn" onClick={accept}>{T.accept}</button>
+        <button type="button" className="ta-cookies__btn" onClick={reject}>{T.reject}</button>
+        <button type="button" className="ta-cookies__btn ta-cookies__btn--ok" onClick={accept}>{T.accept}</button>
       </div>
     </div>
   );
