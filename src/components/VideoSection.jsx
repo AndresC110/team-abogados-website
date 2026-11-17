@@ -1,10 +1,21 @@
 'use client';
 import { useLanguage } from '@/context/LanguageContext';
+import { useRef } from 'react';
 import { translations } from '@/translations';
+import { track } from '@/lib/consent';
 
 export default function VideoSection({ onContactClick }) {
   const { lang } = useLanguage();
   const T = translations[lang].video;
+  const seen = useRef(new Set());
+  const mark = (k) => { if (!seen.current.has(k)) { seen.current.add(k); track(k); } };
+  const onTime = (e) => {
+    const v = e.currentTarget; if (!v.duration) return;
+    const p = v.currentTime / v.duration;
+    if (p >= 0.25) mark('video_25');
+    if (p >= 0.5) mark('video_50');
+    if (p >= 0.75) mark('video_75');
+  };
   return (
     <section className="ta-video" id="video">
       <div className="container">
@@ -26,6 +37,9 @@ export default function VideoSection({ onContactClick }) {
             controls
             preload="metadata"
             playsInline
+            onPlay={() => mark('video_play')}
+            onTimeUpdate={onTime}
+            onEnded={() => mark('video_completo')}
           />
         </div>
         <div className="ta-video__cta">

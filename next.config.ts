@@ -5,15 +5,16 @@ import type { NextConfig } from "next";
 //   bootstrap/hydration inline scripts (no nonce pipeline on this static site).
 // - styles: self + Google Fonts CSS + inline style attributes.
 // - fonts: Google Fonts. images/media: self + data/blob.
+// - Microsoft Clarity (solo se carga si el visitante acepta cookies): scripts y envio de datos a *.clarity.ms.
 // - frame-src: Google Maps embed. frame-ancestors 'none' blocks clickjacking.
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://unpkg.com",
+  "script-src 'self' 'unsafe-inline' https://unpkg.com https://*.clarity.ms",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
   "media-src 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://*.clarity.ms https://c.bing.com",
   "frame-src https://www.google.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",

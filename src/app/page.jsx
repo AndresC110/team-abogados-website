@@ -13,6 +13,8 @@ import FAQ from '@/components/FAQ';
 import Location from '@/components/Location';
 import Footer from '@/components/Footer';
 import ContactSheet from '@/components/ContactSheet';
+import CookieConsent from '@/components/CookieConsent';
+import { track } from '@/lib/consent';
 import { LanguageProvider } from '@/context/LanguageContext';
 import '@/styles/colors_and_type.css';
 import '@/styles/marketing.css';
@@ -33,6 +35,7 @@ export default function Home() {
     if (typeof window !== 'undefined' && window.lucide) {
       window.lucide.createIcons();
     }
+    if (contactOpen) track('abrir_formulario');
   }, [contactOpen]);
 
   return (
@@ -51,6 +54,7 @@ export default function Home() {
       </main>
       <Footer />
       <ContactSheet open={contactOpen} onClose={() => setContactOpen(false)} />
+      <CookieConsent />
     </LanguageProvider>
   );
 }

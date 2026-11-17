@@ -124,6 +124,14 @@ export const translations = {
       hours:        'Llamadas 24h · todos los días',
       copyright:    '© 2026 Team Abogados. Todos los derechos reservados.',
       disclaimer:   'Team Abogados no es un bufete de abogados y no ofrece servicios jurídicos directamente · Publicidad de servicios legales · Resultados pasados no garantizan resultados futuros.',
+      cookieSettings: 'Configurar cookies',
+    },
+    cookies: {
+      title:  'Tu privacidad',
+      body:   'Usamos cookies de analítica (Microsoft Clarity) para entender cómo se usa el sitio y mejorarlo: páginas vistas, clics, desplazamiento y grabaciones anónimas de la sesión. No se activan sin tu permiso y lo que escribes en formularios queda oculto.',
+      more:   'Política de privacidad',
+      accept: 'Aceptar',
+      reject: 'Rechazar',
     },
     contact: {
       eyebrow: 'Consulta gratis',
@@ -283,6 +291,14 @@ export const translations = {
       hours:        'Calls 24h · every day',
       copyright:    '© 2026 Team Abogados. All rights reserved.',
       disclaimer:   'Team Abogados is not a law firm and does not offer legal services directly · Legal services advertising · Past results do not guarantee future results.',
+      cookieSettings: 'Cookie settings',
+    },
+    cookies: {
+      title:  'Your privacy',
+      body:   'We use analytics cookies (Microsoft Clarity) to understand how the site is used and improve it: pages viewed, clicks, scrolling and anonymous session recordings. They are not turned on without your permission, and anything you type into forms is hidden.',
+      more:   'Privacy Policy',
+      accept: 'Accept',
+      reject: 'Decline',
     },
     contact: {
       eyebrow: 'Free consultation',

@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/translations';
+import { track } from '@/lib/consent';
 
 export default function ContactSheet({ open, onClose }) {
   const { lang } = useLanguage();
@@ -40,6 +41,7 @@ export default function ContactSheet({ open, onClose }) {
       const json = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(json.error || 'Error al enviar el formulario');
       setSent(true);
+      track('formulario_enviado');
     } catch (err) {
       setError(err.message || 'Error procesando la solicitud');
     } finally {
@@ -61,7 +63,8 @@ export default function ContactSheet({ open, onClose }) {
             <h2>{T.h2}<em>{T.h2em}</em></h2>
             <p className="lede">{T.lede}</p>
             {error && <div style={{ color: 'var(--ta-gold-700)', marginBottom: 12 }}>{error}</div>}
-            <form ref={formRef} onSubmit={submit}>
+            {/* data-clarity-mask: Clarity nunca graba lo que se escribe aqui */}
+            <form ref={formRef} onSubmit={submit} data-clarity-mask="true">
               {/* Honeypot: hidden from humans, irresistible to bots. Kept out of
                   the tab order and the accessibility tree. */}
               <input

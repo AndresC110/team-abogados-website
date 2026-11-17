@@ -1,6 +1,7 @@
 'use client';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations } from '@/translations';
+import { openCookieSettings, CLARITY_ID } from '@/lib/consent';
 
 export default function Footer() {
   const { lang } = useLanguage();
@@ -23,9 +24,12 @@ export default function Footer() {
           </div>
           <div className="col">
             <h4>{T.legalTitle}</h4>
-            <a href="#">{T.legalLinks.privacy}</a>
+            <a href="/privacidad">{T.legalLinks.privacy}</a>
             <a href="#">{T.legalLinks.terms}</a>
-            <a href="#">{T.legalLinks.disclaimer}</a>
+            <a href="/privacidad#aviso-legal">{T.legalLinks.disclaimer}</a>
+            {CLARITY_ID && (
+              <button type="button" className="ta-footer__linkbtn" onClick={openCookieSettings}>{T.cookieSettings}</button>
+            )}
           </div>
           <div className="col">
             <h4>{T.contactTitle}</h4>
