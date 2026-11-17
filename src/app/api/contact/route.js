@@ -182,7 +182,7 @@ export async function POST(request) {
   // Generic message returned for any server-side failure. Internal details are
   // logged but never sent to the client.
   const GENERIC_ERROR =
-    'No se pudo enviar tu solicitud. Intenta de nuevo o llámanos al (929) 555-0181.';
+    'No se pudo enviar tu solicitud. Intenta de nuevo o llámanos al (646) 724-6127.';
 
   try {
     // --- Rate limit ----------------------------------------------------------

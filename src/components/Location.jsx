@@ -61,7 +61,7 @@ export default function Location() {
                 <i data-lucide="map" width="16" height="16" strokeWidth="1.5"></i>
                 {T.ctaMaps}
               </a>
-              <a className="btn btn-ghost" href="tel:+19295550181">{T.ctaCall}</a>
+              <a className="btn btn-ghost" href="tel:+16467246127">{T.ctaCall}</a>
             </div>
           </div>
 

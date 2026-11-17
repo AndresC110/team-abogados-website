@@ -7,7 +7,7 @@ import PromiseStrip from '@/components/PromiseStrip';
 import WhyUs from '@/components/WhyUs';
 import HowWeWork from '@/components/HowWeWork';
 import Coverage from '@/components/Coverage';
-import Testimonials from '@/components/Testimonials';
+import Reviews from '@/components/Reviews';
 import VideoSection from '@/components/VideoSection';
 import FAQ from '@/components/FAQ';
 import Location from '@/components/Location';
@@ -47,7 +47,7 @@ export default function Home() {
         <WhyUs />
         <HowWeWork />
         <Coverage />
-        <Testimonials />
+        <Reviews />
         <VideoSection onContactClick={() => setContactOpen(true)} />
         <FAQ />
         <Location />
