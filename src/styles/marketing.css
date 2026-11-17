@@ -433,3 +433,8 @@ html { scroll-behavior: smooth; }
   .ta-legal__doc .defs { grid-template-columns: 1fr; gap: 2px; }
   .ta-legal__doc .defs dd { margin-bottom: 10px; }
 }
+
+/* Paginas legales: sin el subrayado heredado de los enlaces generales */
+.ta-legal__toc li a, .ta-legal__nav a, .ta-legal__foot a, .ta-legal__totop a { border-bottom: none; }
+.ta-legal__toc li a { border-left: 1px solid transparent; }
+.ta-legal__toc li a:hover { border-left-color: var(--accent); }
